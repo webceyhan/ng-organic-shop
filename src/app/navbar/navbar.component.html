@@ -21,11 +21,12 @@
                 <a class="nav-link" routerLink="/basket">Basket</a>
             </li>
             <li class="nav-item" ngbDropdown>
-                <a class="nav-link pointer" ngbDropdownToggle>Dropdown</a>
+                <a class="nav-link pointer" ngbDropdownToggle>Username</a>
                 <div ngbDropdownMenu>
-                    <a class="pointer" ngbDropdownItem>Action</a>
-                    <a class="pointer" ngbDropdownItem>Another action</a>
-                    <a class="pointer" ngbDropdownItem>Something else here</a>
+                    <a routerLink="/orders" ngbDropdownItem>My Orders</a>
+                    <a routerLink="/admin/orders" ngbDropdownItem>Manage Orders</a>
+                    <a routerLink="/admin/products" ngbDropdownItem>Manage Products</a>
+                    <a class="pointer" ngbDropdownItem>Log Out</a>
                 </div>
             </li>
         </ul>
