@@ -3,3 +3,7 @@
 body {
     padding-top: 5rem;
 }
+
+.pointer {
+    cursor: pointer;
+}
