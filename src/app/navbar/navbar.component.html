@@ -20,26 +20,21 @@
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/basket">Basket</a>
             </li>
-            <li class="nav-item" ngbDropdown>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item" ngbDropdown display="dynamic">
                 <a class="nav-link pointer" ngbDropdownToggle>Username</a>
-                <div ngbDropdownMenu>
+                <div class="dropdown-menu" ngbDropdownMenu>
                     <a routerLink="/orders" ngbDropdownItem>My Orders</a>
-                    <a routerLink="/admin/orders" ngbDropdownItem>Manage Orders</a>
-                    <a routerLink="/admin/products" ngbDropdownItem>Manage Products</a>
+                    <a routerLink="/admin/orders" ngbDropdownItem
+                        >Manage Orders</a
+                    >
+                    <a routerLink="/admin/products" ngbDropdownItem
+                        >Manage Products</a
+                    >
                     <a class="pointer" ngbDropdownItem>Log Out</a>
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input
-                class="form-control mr-sm-2"
-                type="text"
-                placeholder="Search"
-                aria-label="Search"
-            />
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-                Search
-            </button>
-        </form>
     </div>
 </nav>
