@@ -9,9 +9,30 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { ProductsComponent } from './products/products.component';
+import { BasketComponent } from './basket/basket.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderSuccessComponent } from './order-success/order-success.component';
+import { OrdersComponent } from './orders/orders.component';
+import { LoginComponent } from './login/login.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 
 @NgModule({
-    declarations: [AppComponent, NavbarComponent],
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        HomeComponent,
+        ProductsComponent,
+        BasketComponent,
+        CheckoutComponent,
+        OrderSuccessComponent,
+        OrdersComponent,
+        LoginComponent,
+        AdminProductsComponent,
+        AdminOrdersComponent,
+    ],
     imports: [
         BrowserModule,
         AngularFireModule.initializeApp(environment.firebase),
