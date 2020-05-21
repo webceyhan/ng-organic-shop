@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6 mb-5">
         <!-- edit form -->
-        <form #f="ngForm" (ngSubmit)="onSave(f.value)">
+        <form #f="ngForm" (ngSubmit)="onSave()">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input
@@ -109,7 +109,11 @@
     <!-- preview -->
     <div class="col-md-6">
         <div class="card">
-            <img [src]="product.imageUrl" class="card-img-top" />
+            <img
+                class="card-img-top"
+                [src]="product.imageUrl"
+                *ngIf="product.imageUrl"
+            />
             <div class="card-body">
                 <h5 class="card-title">{{ product.title }}</h5>
                 <p class="card-text">

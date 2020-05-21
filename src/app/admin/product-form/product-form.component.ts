@@ -34,8 +34,11 @@ export class ProductFormComponent implements OnInit {
         this.categories$ = this.categorySvc.getList();
     }
 
-    onSave(product) {
-        this.productSvc.create(product);
+    onSave() {
+        this.product.key
+            ? this.productSvc.update(this.product)
+            : this.productSvc.create(this.product);
+
         this.router.navigate(['/admin/products']);
     }
 }

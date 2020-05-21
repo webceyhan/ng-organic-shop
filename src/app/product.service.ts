@@ -11,8 +11,16 @@ import { keyedList } from './helpers';
 export class ProductService {
     constructor(private db: AngularFireDatabase) {}
 
-    get(uid: string) {
-        return this.db.object<Product>('products/' + uid).valueChanges();
+    get(id: string) {
+        return this.db
+            .object<Product>('products/' + id)
+            .snapshotChanges()
+            .pipe(
+                map((p) => ({
+                    key: p.payload.key,
+                    ...p.payload.val(),
+                }) as Product)
+            );
     }
 
     getAll() {
@@ -24,5 +32,11 @@ export class ProductService {
 
     create(product: Product) {
         return this.db.list('products').push(product);
+    }
+
+    update(product: Product) {
+        const id = product.key;
+        delete product.key;
+        return this.db.object<Product>('products/' + id).update(product);
     }
 }
