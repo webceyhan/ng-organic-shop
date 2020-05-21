@@ -20,8 +20,9 @@ import { LoginComponent } from './login/login.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { UrlValidator } from './url.validator';
-import { MinValidator } from './min.validator';
+import { UrlValidator } from './shared/validators/url.validator';
+import { MinValidator } from './shared/validators/min.validator';
+
 
 @NgModule({
     declarations: [
