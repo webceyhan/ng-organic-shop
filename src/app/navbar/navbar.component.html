@@ -27,7 +27,7 @@
                     class="nav-item"
                     ngbDropdown
                     display="dynamic"
-                    *ngIf="user$ | async as user; else guest"
+                    *ngIf="user; else guest"
                 >
                     <a class="nav-link pointer" ngbDropdownToggle>{{
                         user.name
