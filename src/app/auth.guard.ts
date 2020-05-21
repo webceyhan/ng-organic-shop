@@ -26,7 +26,13 @@ export class AuthGuard implements CanActivate {
         | boolean
         | UrlTree {
         return this.authSvc.user$.pipe(
-            map((user) => (user ? true : this.router.createUrlTree(['/login'])))
+            map((user) => (user ? true : this.toLogin(state.url)))
         );
+    }
+
+    private toLogin(redirect: string) {
+        return this.router.createUrlTree(['/login'], {
+            queryParams: { redirect },
+        });
     }
 }
