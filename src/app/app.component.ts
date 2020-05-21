@@ -21,9 +21,11 @@ export class AppComponent implements OnInit {
                 // save logged-in user to db
                 this.userSvc.save(state);
 
-                // listen to user on login to redirect to origin page
-                const url = localStorage.getItem('redirect') || '/';
-                this.router.navigate([url]);
+                // redirect to origin page on login
+                // if only redirect url exists
+                const url = localStorage.getItem('redirect');
+                url && localStorage.removeItem('redirect');
+                url && this.router.navigate([url]);
             }
         });
     }
