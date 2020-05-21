@@ -11,16 +11,7 @@ export class AuthService {
         private auth: AngularFireAuth,
         private route: ActivatedRoute,
         private router: Router
-    ) {
-        // bugfix: login.then() promise not working
-        // listen to user on login to redirect to origin page
-        this.user$.subscribe((user) => {
-            if (user) {
-                const url = localStorage.getItem('redirect') || '/';
-                this.router.navigate([url]);
-            }
-        });
-    }
+    ) {}
 
     get user$() {
         return this.auth.authState;
@@ -32,6 +23,7 @@ export class AuthService {
         const { redirect } = this.route.snapshot.queryParams;
         localStorage.setItem('redirect', redirect || '/');
 
+        // bugfix: signInWithRedirect().then() promise not working
         this.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
     }
 
