@@ -21,6 +21,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
 import { UrlValidator } from './url.validator';
+import { MinValidator } from './min.validator';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { UrlValidator } from './url.validator';
         AdminOrdersComponent,
         ProductFormComponent,
         UrlValidator,
+        MinValidator
     ],
     imports: [
         BrowserModule,

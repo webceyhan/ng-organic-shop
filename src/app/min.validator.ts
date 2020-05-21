@@ -7,25 +7,25 @@ import {
     Validator,
 } from '@angular/forms';
 
-export const url: ValidatorFn = (
+export const min: ValidatorFn = (
     control: AbstractControl
 ): ValidationErrors => {
-    const pattern = /^((((http[s]?):\/{2})?)+(([0-9a-z_-]+\.)+([a-z]{2,3}))(:[0-9]+)?((\/([~0-9a-zA-Z\#\+\%@\.\/_-]+))?(\?[0-9a-zA-Z\+\%@\/&\[\];=_-]+)?)?)/;
-    return pattern.test(control.value) ? null : { url: true };
+    const pattern = /^[0-9]+$/;
+    return pattern.test(control.value) ? null : { min: true };
 };
 
 @Directive({
-    selector: '[url]',
+    selector: '[min]',
     providers: [
         {
             provide: NG_VALIDATORS,
-            useExisting: UrlValidator,
+            useExisting: MinValidator,
             multi: true,
         },
     ],
 })
-export class UrlValidator implements Validator {
+export class MinValidator implements Validator {
     validate(c: AbstractControl): ValidationErrors {
-        return url(c);
+        return min(c);
     }
 }
