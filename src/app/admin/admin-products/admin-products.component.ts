@@ -15,4 +15,12 @@ export class AdminProductsComponent implements OnInit {
     ngOnInit(): void {
         this.products$ = this.productSvc.getAll();
     }
+
+    onDelete(id: string) {
+        if (confirm('Are you sure to delete this product?')) {
+            this.productSvc.remove(id);
+        }
+        // prevent default href event
+        return false;
+    }
 }
