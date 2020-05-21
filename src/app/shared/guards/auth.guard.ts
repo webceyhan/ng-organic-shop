@@ -4,17 +4,18 @@ import {
     ActivatedRouteSnapshot,
     RouterStateSnapshot,
     UrlTree,
+    Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import { AuthService } from './shared/services/auth.service';
 import { map } from 'rxjs/operators';
+
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class AdminGuard implements CanActivate {
-    constructor(private authSvc: AuthService) {}
+export class AuthGuard implements CanActivate {
+    constructor(private router: Router, private authSvc: AuthService) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
@@ -24,6 +25,14 @@ export class AdminGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        return this.authSvc.user$.pipe(map((user) => user.isAdmin));
+        return this.authSvc.user$.pipe(
+            map((user) => (user ? true : this.toLogin(state.url)))
+        );
+    }
+
+    private toLogin(redirect: string) {
+        return this.router.createUrlTree(['/login'], {
+            queryParams: { redirect },
+        });
     }
 }
