@@ -10,9 +10,9 @@ import { Product } from 'src/app/models/product';
     styleUrls: ['./admin-products.component.css'],
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
+    sub: Subscription;
     products: Product[] = [];
     filteredProducts: Product[] = [];
-    sub: Subscription;
 
     constructor(private productSvc: ProductService) {}
 
@@ -38,7 +38,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
     onFilter(query: string) {
         this.filteredProducts = query
-            ? this.products.filter((p) => p.title.toLowerCase().includes(query.toLowerCase()))
+            ? this.products.filter((p) =>
+                  p.title.toLowerCase().includes(query.toLowerCase())
+              )
             : this.products;
     }
 }
