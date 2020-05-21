@@ -13,7 +13,7 @@ export class CategoryService {
 
     getList() {
         return this.db
-            .list<Category>('categories')
+            .list<Category>('categories', (ref) => ref.orderByKey())
             .snapshotChanges()
             .pipe(map(keyedList));
     }
