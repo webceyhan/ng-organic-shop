@@ -10,8 +10,8 @@ import {
 export const min: ValidatorFn = (
     control: AbstractControl
 ): ValidationErrors => {
-    const pattern = /^[0-9]+$/;
-    return pattern.test(control.value) ? null : { min: true };
+    const { value } = control;
+    return +value > 0 ? null : { min: true };
 };
 
 @Directive({
