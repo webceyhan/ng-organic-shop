@@ -3,7 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 
 import { Category } from '../models/category';
-import { keyedList } from '../../helpers';
+import { keyedList } from '../helpers';
 
 @Injectable({
     providedIn: 'root',
