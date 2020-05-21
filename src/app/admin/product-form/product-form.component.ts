@@ -4,7 +4,7 @@ import { take } from 'rxjs/operators';
 
 import { ProductService } from 'src/app/product.service';
 import { CategoryService } from 'src/app/category.service';
-import { Product } from 'src/app/models/product';
+import { Product } from 'src/app/shared/models/product';
 
 @Component({
     selector: 'app-product-form',
