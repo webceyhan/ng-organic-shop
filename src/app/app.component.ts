@@ -16,10 +16,10 @@ export class AppComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.authSvc.user$.subscribe((user) => {
-            if (user) {
+        this.authSvc.state$.subscribe((state) => {
+            if (state) {
                 // save logged-in user to db
-                this.userSvc.save(user);
+                this.userSvc.save(state);
 
                 // listen to user on login to redirect to origin page
                 const url = localStorage.getItem('redirect') || '/';

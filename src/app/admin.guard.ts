@@ -8,14 +8,13 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthService } from './auth.service';
-import { map, switchMap } from 'rxjs/operators';
-import { UserService } from './user.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AdminGuard implements CanActivate {
-    constructor(private authSvc: AuthService, private userSvc: UserService) {}
+    constructor(private authSvc: AuthService) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
@@ -25,9 +24,6 @@ export class AdminGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        return this.authSvc.user$.pipe(
-            switchMap((user) => this.userSvc.get(user.uid)),
-            map((user) => user.isAdmin)
-        );
+        return this.authSvc.user$.pipe(map((user) => user.isAdmin));
     }
 }

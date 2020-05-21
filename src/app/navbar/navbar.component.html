@@ -30,16 +30,18 @@
                     *ngIf="user$ | async as user; else guest"
                 >
                     <a class="nav-link pointer" ngbDropdownToggle>{{
-                        user.displayName
+                        user.name
                     }}</a>
                     <div class="dropdown-menu" ngbDropdownMenu>
                         <a routerLink="/orders" ngbDropdownItem>My Orders</a>
-                        <a routerLink="/admin/orders" ngbDropdownItem
-                            >Manage Orders</a
-                        >
-                        <a routerLink="/admin/products" ngbDropdownItem
-                            >Manage Products</a
-                        >
+                        <ng-container *ngIf="user.isAdmin">
+                            <a routerLink="/admin/orders" ngbDropdownItem
+                                >Manage Orders</a
+                            >
+                            <a routerLink="/admin/products" ngbDropdownItem
+                                >Manage Products</a
+                            >
+                        </ng-container>
                         <a class="pointer" ngbDropdownItem (click)="onLogout()"
                             >Log Out</a
                         >

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase';
+
+import { UserService } from './user.service';
 
 @Injectable({
     providedIn: 'root',
@@ -10,11 +13,18 @@ export class AuthService {
     constructor(
         private auth: AngularFireAuth,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private userSvc: UserService
     ) {}
 
-    get user$() {
+    get state$() {
         return this.auth.authState;
+    }
+
+    get user$() {
+        return this.state$.pipe(
+            switchMap((user) => this.userSvc.get(user.uid))
+        );
     }
 
     login() {
