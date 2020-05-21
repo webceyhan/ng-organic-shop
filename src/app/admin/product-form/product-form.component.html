@@ -102,7 +102,15 @@
                 </small>
             </div>
 
-            <button class="btn btn-primary" [disabled]="f.invalid">Save</button>
+            <button class="btn btn-primary mr-2" [disabled]="f.invalid">Save</button>
+            <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onDelete()"
+                *ngIf="product.key"
+            >
+                Delete
+            </button>
         </form>
     </div>
 
