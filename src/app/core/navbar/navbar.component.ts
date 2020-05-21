@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../shared/services/auth.service';
 import { User } from '../../shared/models/user';
@@ -11,13 +12,14 @@ import { User } from '../../shared/models/user';
 export class NavbarComponent implements OnInit {
     user: User;
 
-    constructor(private authSvc: AuthService) {}
+    constructor(private router: Router, private authSvc: AuthService) {}
 
     ngOnInit() {
-        this.authSvc.user$.subscribe(user => this.user = user);
+        this.authSvc.user$.subscribe((user) => (this.user = user));
     }
 
     onLogout() {
         this.authSvc.logout();
+        this.router.navigate(['/']);
     }
 }

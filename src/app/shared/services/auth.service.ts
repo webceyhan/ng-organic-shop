@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase';
@@ -14,7 +14,6 @@ export class AuthService {
     constructor(
         private auth: AngularFireAuth,
         private route: ActivatedRoute,
-        private router: Router,
         private userSvc: UserService
     ) {}
 
@@ -40,6 +39,5 @@ export class AuthService {
 
     logout() {
         this.auth.signOut();
-        this.router.navigate(['/']);
     }
 }
