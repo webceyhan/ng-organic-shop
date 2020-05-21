@@ -20,6 +20,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
+import { UrlValidator } from './url.validator';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { FormsModule } from '@angular/forms';
         AdminProductsComponent,
         AdminOrdersComponent,
         ProductFormComponent,
+        UrlValidator,
     ],
     imports: [
         BrowserModule,
