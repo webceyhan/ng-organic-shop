@@ -1,10 +1,25 @@
-<a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
+<div class="row">
+    <div class="col">
+        <a routerLink="/admin/products/new" class="btn btn-primary"
+            >New Product</a
+        >
+    </div>
+    <div class="col">
+        <input
+            #query
+            type="text"
+            class="form-control"
+            (keyup)="onFilter(query.value)"
+            placeholder="search..."
+        />
+    </div>
+</div>
 
 <br />
 <br />
 
 <table class="table table-hover">
-    <thead class="table-light">
+    <thead class="thead-light">
         <tr>
             <th>Title</th>
             <th>Price</th>
@@ -12,11 +27,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of products$ | async">
+        <tr *ngFor="let product of filteredProducts">
             <td>{{ product.title }}</td>
             <td>{{ product.price | currency: "USD":true }}</td>
             <td>
-                <a class="mr-2" [routerLink]="['/admin/products', product.key]">Edit</a>
+                <a class="mr-2" [routerLink]="['/admin/products', product.key]"
+                    >Edit</a
+                >
                 <a href="#" (click)="onDelete(product.key)">Delete</a>
             </td>
         </tr>
