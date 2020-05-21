@@ -29,7 +29,7 @@
     <tbody>
         <tr *ngFor="let product of filteredProducts">
             <td>{{ product.title }}</td>
-            <td>{{ product.price | currency: "USD":true }}</td>
+            <td>{{ product.price | currency }}</td>
             <td>
                 <a class="mr-2" [routerLink]="['/admin/products', product.key]"
                     >Edit</a
