@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase';
 
 import { UserService } from './user.service';
+import { of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -23,7 +24,7 @@ export class AuthService {
 
     get user$() {
         return this.state$.pipe(
-            switchMap((user) => this.userSvc.get(user.uid))
+            switchMap((user) => (user ? this.userSvc.get(user.uid) : of(null)))
         );
     }
 
