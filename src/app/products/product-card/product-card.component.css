@@ -1,3 +1,7 @@
+.card:hover:not(.preview) {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
 .card-img-top {
     max-height: 8rem;
     object-fit: cover;
