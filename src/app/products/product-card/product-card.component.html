@@ -1,5 +1,9 @@
 <div class="card">
-    <img [src]="product.imageUrl" class="card-img-top" />
+    <img
+        class="card-img-top"
+        [class.img-preview]="preview"
+        [src]="product.imageUrl"
+    />
     <div class="card-body">
         <h5 class="card-title">{{ product.title }}</h5>
         <p class="card-text d-flex justify-content-between align-items-center">

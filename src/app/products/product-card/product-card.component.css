@@ -2,3 +2,7 @@
     max-height: 8rem;
     object-fit: cover;
 }
+
+.img-preview {
+    max-height: 30rem;
+}
