@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { Category } from 'src/app/shared/models/category';
+import { Product } from 'src/app/shared/models/product';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
     selector: 'app-home',
@@ -11,10 +13,13 @@ import { Category } from 'src/app/shared/models/category';
 })
 export class HomeComponent implements OnInit {
     categories$: Observable<Category[]>;
+    products$: Observable<Product[]>;
 
-    constructor(private categorySvc: CategoryService) {}
+    constructor(private categorySvc: CategoryService, private productSvc:ProductService) {}
 
     ngOnInit(): void {
         this.categories$ = this.categorySvc.getAll();
+
+        this.products$ = this.productSvc.getAll();
     }
 }
