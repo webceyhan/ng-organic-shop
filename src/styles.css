@@ -7,3 +7,8 @@ body {
 .pointer {
     cursor: pointer;
 }
+
+.card-img-top {
+    max-height: 8rem;
+    object-fit: cover;
+}
