@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { ProductService } from 'src/app/shared/services/product.service';
-import { CategoryService } from 'src/app/shared/services/category.service';
-import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
 
 @Component({
@@ -14,7 +12,6 @@ import { Product } from 'src/app/shared/models/product';
     styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-    categories$: Observable<Category[]>;
     // products$: Observable<Product[]>;
 
     products: Product[] = [];
@@ -22,13 +19,10 @@ export class HomeComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private categorySvc: CategoryService,
         private productSvc: ProductService
     ) {}
 
     ngOnInit(): void {
-        this.categories$ = this.categorySvc.getAll();
-
         //
         // server-side filtering approach
         //
