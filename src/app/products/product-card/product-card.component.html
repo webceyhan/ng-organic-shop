@@ -6,7 +6,11 @@
             <span>
                 {{ product.price | currency }}
             </span>
-            <button class="btn btn-primary btn-sm" (click)="onAddToBasket()">
+            <button
+                *ngIf="!preview"
+                class="btn btn-primary btn-sm"
+                (click)="onAddToBasket()"
+            >
                 <i class="fas fa-shopping-cart"></i>
             </button>
         </p>

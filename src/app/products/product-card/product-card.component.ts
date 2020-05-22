@@ -11,6 +11,9 @@ export class ProductCardComponent implements OnInit {
     @Input()
     product: Product;
 
+    @Input()
+    preview = false;
+
     @Output()
     addToBasket = new EventEmitter<Product>();
 
