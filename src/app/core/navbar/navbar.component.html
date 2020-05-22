@@ -19,7 +19,15 @@
                     <a class="nav-link" routerLink="/">Home</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/basket">Basket</a>
+                    <a
+                        class="nav-link d-flex align-items-center"
+                        routerLink="/basket"
+                    >
+                        <span class="mr-2">Basket</span>
+                        <span class="badge badge-warning">{{
+                            basketCount
+                        }}</span>
+                    </a>
                 </li>
             </ul>
             <ul class="navbar-nav">

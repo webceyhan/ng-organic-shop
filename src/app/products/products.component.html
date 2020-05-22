@@ -11,10 +11,7 @@
                 *ngFor="let product of filteredProducts$ | async"
             >
                 <!-- card -->
-                <app-product-card
-                    [product]="product"
-                    (addToBasket)="onAddBasket(product)"
-                ></app-product-card>
+                <app-product-card [product]="product"></app-product-card>
             </div>
         </div>
     </div>

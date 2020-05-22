@@ -10,13 +10,24 @@
             <span>
                 {{ product.price | currency }}
             </span>
-            <button
-                *ngIf="!preview"
-                class="btn btn-primary btn-sm"
-                (click)="onAddToBasket()"
-            >
-                <i class="fas fa-shopping-cart"></i>
-            </button>
+
+            <span *ngIf="!preview">
+                <ng-container *ngIf="basketQuantity$ | async as qtty">
+                    <button
+                        class="btn btn-light btn-sm mr-2"
+                        (click)="onDecreaseBasketItem()"
+                    >
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="badge badge-light mr-2">{{ qtty }}</span>
+                </ng-container>
+                <button
+                    class="btn btn-primary btn-sm"
+                    (click)="onIncreaseBasketItem()"
+                >
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+            </span>
         </p>
     </div>
 </div>

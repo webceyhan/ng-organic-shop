@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../shared/services/auth.service';
 import { User } from '../../shared/models/user';
+import { AuthService } from '../../shared/services/auth.service';
+import { BasketService } from 'src/app/shared/services/basket.service';
 
 @Component({
     selector: 'app-navbar',
@@ -11,11 +12,17 @@ import { User } from '../../shared/models/user';
 })
 export class NavbarComponent implements OnInit {
     user: User;
+    basketCount: number;
 
-    constructor(private router: Router, private authSvc: AuthService) {}
+    constructor(
+        private router: Router,
+        private authSvc: AuthService,
+        private basketSvc: BasketService
+    ) {}
 
     ngOnInit() {
         this.authSvc.user$.subscribe((user) => (this.user = user));
+        this.basketSvc.count$.subscribe((count) => (this.basketCount = count));
     }
 
     onLogout() {

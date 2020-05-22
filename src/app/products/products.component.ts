@@ -52,8 +52,4 @@ export class ProductsComponent implements OnInit {
             )
         );
     }
-
-    onAddBasket(product: Product) {
-        console.log(product);
-    }
 }

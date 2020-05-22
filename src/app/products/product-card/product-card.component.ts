@@ -1,6 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Product } from 'src/app/shared/models/product';
+import { BasketService } from 'src/app/shared/services/basket.service';
 
 @Component({
     selector: 'app-product-card',
@@ -14,14 +17,22 @@ export class ProductCardComponent implements OnInit {
     @Input()
     preview = false;
 
-    @Output()
-    addToBasket = new EventEmitter<Product>();
+    basketQuantity$: Observable<number>;
 
-    constructor() {}
+    constructor(private basketSvc: BasketService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        // initialize basket item quantity or default to 0
+        this.basketQuantity$ = this.basketSvc
+            .get(this.product.key)
+            .pipe(map((item) => item?.quantity || 0));
+    }
 
-    onAddToBasket() {
-        this.addToBasket.emit(this.product);
+    onIncreaseBasketItem() {
+        this.basketSvc.increase(this.product);
+    }
+
+    onDecreaseBasketItem() {
+        this.basketSvc.decrease(this.product);
     }
 }
