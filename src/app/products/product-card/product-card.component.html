@@ -1,8 +1,7 @@
-<div class="card">
+<div class="card" [class.preview]="preview">
     <img
         *ngIf="product.imageUrl"
         class="card-img-top"
-        [class.img-preview]="preview"
         [src]="product.imageUrl"
     />
     <div class="card-body">

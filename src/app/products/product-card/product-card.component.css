@@ -3,6 +3,6 @@
     object-fit: cover;
 }
 
-.img-preview {
+.preview .card-img-top {
     max-height: 20rem;
 }
