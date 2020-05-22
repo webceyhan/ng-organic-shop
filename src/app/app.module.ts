@@ -23,6 +23,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { UrlValidator } from './shared/validators/url.validator';
 import { MinValidator } from './shared/validators/min.validator';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
 
 
 
@@ -43,6 +44,7 @@ import { ProductFilterComponent } from './products/product-filter/product-filter
         UrlValidator,
         MinValidator,
         ProductFilterComponent,
+        ProductCardComponent,
     ],
     imports: [
         BrowserModule,

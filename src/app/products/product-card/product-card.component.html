@@ -1,0 +1,14 @@
+<div class="card">
+    <img [src]="product.imageUrl" class="card-img-top" />
+    <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <p class="card-text d-flex justify-content-between align-items-center">
+            <span>
+                {{ product.price | currency }}
+            </span>
+            <button class="btn btn-primary btn-sm" (click)="onAddToBasket()">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+        </p>
+    </div>
+</div>
