@@ -1,5 +1,6 @@
 <div class="card">
     <img
+        *ngIf="product.imageUrl"
         class="card-img-top"
         [class.img-preview]="preview"
         [src]="product.imageUrl"
