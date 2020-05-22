@@ -11,7 +11,7 @@ import { keyedList } from '../helpers';
 export class CategoryService {
     constructor(private db: AngularFireDatabase) {}
 
-    getList() {
+    getAll() {
         return this.db
             .list<Category>('categories', (ref) => ref.orderByKey())
             .snapshotChanges()
