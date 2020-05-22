@@ -1,1 +1,33 @@
-<p>products works!</p>
+<div class="row">
+    <div class="col-md-3 mb-4">
+        <app-product-filter></app-product-filter>
+    </div>
+
+    <div class="col-md-9">
+        <!-- card columns -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+            <div
+                class="col mb-4"
+                *ngFor="let product of filteredProducts$ | async"
+            >
+                <!-- card -->
+                <div class="card">
+                    <img [src]="product.imageUrl" class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p
+                            class="card-text d-flex justify-content-between align-items-center"
+                        >
+                            <span>
+                                {{ product.price | currency }}
+                            </span>
+                            <button class="btn btn-primary btn-sm">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
