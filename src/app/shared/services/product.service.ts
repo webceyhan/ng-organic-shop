@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, QueryFn } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 
 import { Product } from '../models/product';
@@ -16,16 +16,23 @@ export class ProductService {
             .object<Product>('products/' + id)
             .snapshotChanges()
             .pipe(
-                map((p) => ({
-                    key: p.payload.key,
-                    ...p.payload.val(),
-                }) as Product)
+                map(
+                    (product) =>
+                        ({
+                            key: product.payload.key,
+                            ...product.payload.val(),
+                        } as Product)
+                )
             );
     }
 
-    getAll() {
+    getAll(query?: QueryFn) {
+        if (!query) { // default query
+            query = (ref) => ref.orderByKey();
+        }
+
         return this.db
-            .list<Product>('products', (ref) => ref.orderByKey())
+            .list<Product>('products', query)
             .snapshotChanges()
             .pipe(map(keyedList));
     }
@@ -40,7 +47,7 @@ export class ProductService {
         return this.db.object<Product>('products/' + id).update(product);
     }
 
-    remove(id:string) {
+    remove(id: string) {
         return this.db.object<Product>('products/' + id).remove();
     }
 }
