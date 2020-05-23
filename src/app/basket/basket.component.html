@@ -1,7 +1,7 @@
-<h1 class="display-4">Shopping Cart</h1>
+<h1 class="display-4">Basket</h1>
 
 <p class="lead text-muted">
-    You have {{ itemCount$ | async }} items in your shopping cart
+    You have {{ itemCount$ | async }} items in your basket.
 </p>
 
 <br />
@@ -9,15 +9,15 @@
 <table class="table">
     <thead class="thead-light">
         <tr>
-            <th></th>
-            <th>Product</th>
-            <th>Quantity</th>
+            <th class="d-none d-md-table-cell"></th>
+            <th class="w-50">Product</th>
+            <th class="w-25">Quantity</th>
             <th class="text-right">Price</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let item of items$ | async">
-            <th>
+            <th class="d-none d-md-table-cell">
                 <img class="rounded-circle" [src]="item.imageUrl" />
             </th>
             <td class="lead">{{ item.title }}</td>
