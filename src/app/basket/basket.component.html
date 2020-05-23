@@ -1,1 +1,37 @@
-<p>basket works!</p>
+<h1 class="display-4">Shopping Cart</h1>
+
+<p class="lead text-muted">
+    You have {{ itemCount$ | async }} items in your shopping cart
+</p>
+
+<br />
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th class="text-right">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items$ | async">
+            <th>
+                <img class="rounded-circle" [src]="item.imageUrl" />
+            </th>
+            <td class="lead">{{ item.title }}</td>
+            <td>{{ item.quantity }}</td>
+            <td class="text-right">
+                {{ item.price * item.quantity | currency }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr />
+
+<div class="d-flex justify-content-between align-items-center">
+    <button class="btn btn-warning" (click)="onClear()">Clear Basket</button>
+    <h4>Total: {{ total$ | async | currency }}</h4>
+</div>
