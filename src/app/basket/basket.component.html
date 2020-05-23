@@ -21,7 +21,22 @@
                 <img class="rounded-circle" [src]="item.imageUrl" />
             </th>
             <td class="lead">{{ item.title }}</td>
-            <td>{{ item.quantity }}</td>
+            <td>
+                <button
+                    class="btn btn-light btn-sm mr-2"
+                    (click)="onDecreaseBasketItem(item)"
+                >
+                    <i class="fas fa-minus"></i>
+                </button>
+                <span class="badge badge-light mr-2">{{ item.quantity }}</span>
+
+                <button
+                    class="btn btn-primary btn-sm"
+                    (click)="onIncreaseBasketItem(item)"
+                >
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+            </td>
             <td class="text-right">
                 {{ item.price * item.quantity | currency }}
             </td>

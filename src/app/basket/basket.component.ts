@@ -25,4 +25,12 @@ export class BasketComponent implements OnInit {
     onClear() {
         this.basketSvc.clear();
     }
+
+    onIncreaseBasketItem(item) {
+        this.basketSvc.increase(item);
+    }
+
+    onDecreaseBasketItem(item) {
+        this.basketSvc.decrease(item);
+    }
 }
