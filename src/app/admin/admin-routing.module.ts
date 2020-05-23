@@ -9,22 +9,26 @@ import { AdminGuard } from '../shared/guards/admin.guard';
 
 const routes: Routes = [
     {
-        path: 'admin/products/new',
-        component: ProductFormComponent,
-    },
-    {
-        path: 'admin/products/:id',
-        component: ProductFormComponent,
-    },
-    {
-        path: 'admin/products',
-        component: AdminProductsComponent,
+        path: 'admin',
         canActivate: [AuthGuard, AdminGuard],
-    },
-    {
-        path: 'admin/orders',
-        component: AdminOrdersComponent,
-        canActivate: [AuthGuard, AdminGuard],
+        children: [
+            {
+                path: 'products/new',
+                component: ProductFormComponent,
+            },
+            {
+                path: 'products/:id',
+                component: ProductFormComponent,
+            },
+            {
+                path: 'products',
+                component: AdminProductsComponent,
+            },
+            {
+                path: 'orders',
+                component: AdminOrdersComponent,
+            },
+        ],
     },
 ];
 
