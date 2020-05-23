@@ -15,27 +15,30 @@ export class BasketService {
         // try to load it from local storage
         const basket = localStorage.getItem('basket');
         this.basket$.next(basket ? JSON.parse(basket) : {});
-    }
 
-    get items$() {
-        return this.basket$
-            .asObservable()
-            .pipe(map((basket) => Object.values(basket)));
+        // automatic write-out to cachte
+        this.basket$.subscribe((basket) => {
+            localStorage.setItem('basket', JSON.stringify(basket));
+        });
     }
 
     get count$() {
-        return this.items$.pipe(map((items) => items.length));
+        return this.getAll().pipe(map((items) => items.length));
     }
 
     get total$() {
-        return this.items$.pipe(
-            map((items) => items.map((item) => item.price)),
+        return this.getAll().pipe(
+            map((items) =>
+                items.map(({ price, quantity }) => price * quantity)
+            ),
             map((prices) => prices.reduce((sum, price) => sum + price, 0))
         );
     }
 
     getAll() {
-        return this.items$;
+        return this.basket$
+            .asObservable()
+            .pipe(map((basket) => Object.values(basket)));
     }
 
     get(id: string) {
@@ -43,25 +46,23 @@ export class BasketService {
     }
 
     increase(product: Product) {
-        const { key, price } = product;
+        const { key } = product;
         const next = this.basket$.value;
-        const item = next[key] || { product, price, quantity: 0 };
+        const item = next[key] || { ...product, quantity: 0 };
 
         // update
         item.quantity += 1;
-        item.price = price * item.quantity;
 
         this.basket$.next({ ...next, [key]: item });
     }
 
     decrease(product: Product) {
-        const { key, price } = product;
+        const { key } = product;
         const next = this.basket$.value;
         const item = next[key];
 
         // update
         item.quantity -= 1;
-        item.price = price * item.quantity;
 
         if (!item.quantity) {
             delete next[key];
