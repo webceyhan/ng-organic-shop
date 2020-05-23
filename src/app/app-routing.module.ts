@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './core/home/home.component';
-import { LoginComponent } from './core/login/login.component';
 import { ProductsComponent } from './products/products.component';
 import { BasketComponent } from './basket/basket.component';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -15,8 +13,6 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { AdminGuard } from './shared/guards/admin.guard';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent },
     { path: 'products', component: ProductsComponent },
     { path: 'basket', component: BasketComponent },
     {
