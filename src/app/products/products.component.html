@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col-md-3 mb-4">
-        <app-product-filter></app-product-filter>
+        <ng-container *ngIf="categories$ | async as categories">
+            <app-product-filter [categories]="categories"></app-product-filter>
+        </ng-container>
     </div>
 
     <div class="col-md-9">

@@ -5,6 +5,8 @@ import { tap, switchMap, map } from 'rxjs/operators';
 
 import { Product } from '../shared/models/product';
 import { ProductService } from '../shared/services/product.service';
+import { CategoryService } from '../shared/services/category.service';
+import { Category } from '../shared/models/category';
 
 @Component({
     selector: 'app-products',
@@ -14,15 +16,19 @@ import { ProductService } from '../shared/services/product.service';
 export class ProductsComponent implements OnInit {
     // products$: Observable<Product[]>;
 
-    products: Product[] = [];
+    categories$: Observable<Category[]>;
     filteredProducts$: Observable<Product[]>;
+    products: Product[] = [];
 
     constructor(
         private route: ActivatedRoute,
-        private productSvc: ProductService
+        private productSvc: ProductService,
+        private categorySvc: CategoryService
     ) {}
 
     ngOnInit(): void {
+        this.categories$ = this.categorySvc.getAll();
+
         //
         // server-side filtering approach
         //
