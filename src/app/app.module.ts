@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -20,12 +19,9 @@ import { LoginComponent } from './core/login/login.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { UrlValidator } from './shared/validators/url.validator';
-import { MinValidator } from './shared/validators/min.validator';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
-
-
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -41,19 +37,17 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
         AdminProductsComponent,
         AdminOrdersComponent,
         ProductFormComponent,
-        UrlValidator,
-        MinValidator,
         ProductFilterComponent,
         ProductCardComponent,
     ],
     imports: [
         BrowserModule,
-        FormsModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
         AngularFireAuthModule,
         AppRoutingModule,
         NgbModule,
+        SharedModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
