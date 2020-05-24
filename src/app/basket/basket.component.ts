@@ -22,15 +22,12 @@ export class BasketComponent implements OnInit {
         this.total$ = this.basketSvc.total$;
     }
 
+    onItemUpdate(item: BasketItem) {
+        if (item.quantity > 0) this.basketSvc.addItem(item);
+        else this.basketSvc.removeItem(item);
+    }
+
     onClear() {
         this.basketSvc.clear();
-    }
-
-    onIncreaseBasketItem(item) {
-        this.basketSvc.addItem(item);
-    }
-
-    onDecreaseBasketItem(item) {
-        this.basketSvc.removeItem(item);
     }
 }

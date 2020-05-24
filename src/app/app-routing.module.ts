@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BasketComponent } from './basket/basket.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
-    { path: 'basket', component: BasketComponent },
     {
         path: 'checkout',
         component: CheckoutComponent,

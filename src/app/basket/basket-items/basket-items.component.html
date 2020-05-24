@@ -1,0 +1,44 @@
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th class="d-none d-md-table-cell"></th>
+            <th class="w-50">Product</th>
+            <th class="w-25">Quantity</th>
+            <th class="text-right">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items">
+            <th class="d-none d-md-table-cell">
+                <img class="rounded-circle" [src]="item.imageUrl" />
+            </th>
+            <td class="lead">{{ item.title }}</td>
+            <td>
+                <button
+                    class="btn btn-light btn-sm mr-2"
+                    (click)="onQuantityUpdate(item, -1)"
+                >
+                    <i class="fas fa-minus"></i>
+                </button>
+                <span class="badge badge-light mr-2">{{ item.quantity }}</span>
+
+                <button
+                    class="btn btn-primary btn-sm"
+                    (click)="onQuantityUpdate(item, 1)"
+                >
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+            </td>
+            <td class="text-right">
+                {{ item.price * item.quantity | currency }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr />
+
+<h4 class="text-right">
+    <span class="text-muted mr-4">Total:</span>
+    {{ total | currency }}
+</h4>
