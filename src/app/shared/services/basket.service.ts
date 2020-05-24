@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { ReplaySubject } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
 
 import { Basket, BasketItem } from '../models/basket';
-import { Product } from '../models/product';
 
 @Injectable({
     providedIn: 'root',
 })
 export class BasketService {
-    private basket$ = new BehaviorSubject<Basket>(null);
+    private id$ = new ReplaySubject<string>(1);
 
-    constructor() {
+    constructor(private db: AngularFireDatabase) {
         this.load();
     }
 
@@ -27,77 +27,52 @@ export class BasketService {
     }
 
     get() {
-        return this.basket$.asObservable();
+        return this.id$.pipe(
+            map((id) => this.db.object<Basket>('baskets/' + id)),
+            switchMap((ref) => ref.valueChanges())
+        );
     }
 
     getItems() {
         return this.get().pipe(
-            map((basket) => basket.items),
+            map((basket) => basket.items || {}),
             map((items) => Object.values(items))
         );
     }
 
-    updateItem(item: BasketItem) {
-        const { key } = item;
-        const next = this.basket$.value;
+    async updateItem(item: BasketItem) {
+        const itemId = item.key;
+        const id = await this.id$.pipe(take(1)).toPromise();
+        const ref = this.db.object('baskets/' + id + '/items/' + itemId);
 
-        // update
-        next.items[key] = { ...item };
-
-        // delete if quantity = 0
-        if (!item.quantity) {
-            delete next.items[key];
-        }
-
-        this.basket$.next({ ...next });
+        // update or delete if quantity = 0
+        item.quantity ? ref.update(item) : ref.remove();
     }
 
-    addItem(product: Product) {
-        const { key } = product;
-        const { items } = this.basket$.value;
-        const item = items[key] || { ...product, quantity: 0 };
+    async clear() {
+        const id = await this.id$.pipe(take(1)).toPromise();
+        const ref = this.db.object('baskets/' + id);
 
-        // update
-        item.quantity += 1;
-
-        this.basket$.next({
-            ...this.basket$.value,
-            items: { ...items, [key]: item },
-        });
-    }
-
-    removeItem(product: Product) {
-        const { key } = product;
-        const { items } = this.basket$.value;
-
-        // update (or delete if 0)
-        items[key].quantity -= 1;
-        if (!items[key].quantity) delete items[key];
-
-        this.basket$.next({
-            ...this.basket$.value,
-            items: { ...items },
-        });
-    }
-
-    clear() {
-        this.basket$.next({ ...this.basket$.value, items: {} });
+        ref.update({ items: {} });
     }
 
     // HELPERS /////////////////////////////////////////////////////////////////////////////////////
 
-    private load() {
+    private async load() {
         // try to load it from cache storage
-        const basket = localStorage.getItem('basket');
-        this.basket$.next(basket ? JSON.parse(basket) : this.create());
+        const id = localStorage.getItem('basketId');
 
-        // auto-write to cache on every update
-        this.basket$.subscribe((basket) => {
-            localStorage.setItem('basket', JSON.stringify(basket));
-        });
+        // use cached or create new basket
+        this.id$.next(id || (await this.create()));
     }
 
-    private create() {
-        return { items: {}, timestamp: new Date().getTime() };
+    private async create() {
+        const basket = { items: {}, timestamp: new Date().getTime() };
+        const result = await this.db.list('baskets').push(basket);
+
+        // cache
+        localStorage.setItem('basketId', result.key);
+
+        return result.key;
     }
 }
