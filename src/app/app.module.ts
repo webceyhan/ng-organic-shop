@@ -9,15 +9,15 @@ import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrderComponent } from './orders/order/order.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         CheckoutComponent,
-        OrderSuccessComponent,
         OrdersComponent,
+        OrderComponent,
     ],
     imports: [
         BrowserModule,

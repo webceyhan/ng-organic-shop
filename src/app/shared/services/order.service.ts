@@ -17,11 +17,11 @@ export class OrderService {
 
     // HELPERS /////////////////////////////////////////////////////////////////////////////////////
 
-    prepare(shipping: Shipping, basketItems: BasketItem[]) {
+    prepare(userId, shipping: Shipping, basketItems: BasketItem[]) {
         const items = this.prepareItems(basketItems);
         const timestamp = new Date().getTime();
 
-        return { timestamp, shipping, items } as Order;
+        return { userId, timestamp, shipping, items } as Order;
     }
 
     private prepareItems(items: BasketItem[]) {

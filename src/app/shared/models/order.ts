@@ -9,6 +9,7 @@ export interface OrderItem {
 }
 
 export interface Order {
+    userId: string;
     items: OrderItem[];
     shipping: Shipping;
     timestamp: number;
