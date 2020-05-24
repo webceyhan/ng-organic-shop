@@ -3,10 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap, switchMap, map } from 'rxjs/operators';
 
-import { Product } from '../shared/models/product';
+import { BasketService } from '../shared/services/basket.service';
 import { ProductService } from '../shared/services/product.service';
 import { CategoryService } from '../shared/services/category.service';
 import { Category } from '../shared/models/category';
+import { Product } from '../shared/models/product';
+import { Basket, BasketItem } from '../shared/models/basket';
 
 @Component({
     selector: 'app-products',
@@ -14,39 +16,22 @@ import { Category } from '../shared/models/category';
     styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-    // products$: Observable<Product[]>;
-
+    basket$: Observable<Basket>;
+    products: Product[] = [];
     categories$: Observable<Category[]>;
     filteredProducts$: Observable<Product[]>;
-    products: Product[] = [];
 
     constructor(
         private route: ActivatedRoute,
+        private basketSvc: BasketService,
         private productSvc: ProductService,
         private categorySvc: CategoryService
     ) {}
 
     ngOnInit(): void {
+        this.basket$ = this.basketSvc.get();
         this.categories$ = this.categorySvc.getAll();
 
-        //
-        // server-side filtering approach
-        //
-
-        // this.products$ = this.route.queryParams.pipe(
-        //     map((params) => params.category),
-        //     switchMap((category) => {
-        //         return this.productSvc.getAll((ref) =>
-        //             category
-        //                 ? ref.orderByChild('category').equalTo(category)
-        //                 : ref
-        //         );
-        //     })
-        // );
-
-        //
-        // client-side filtering
-        //
         this.filteredProducts$ = this.productSvc.getAll().pipe(
             tap((all) => (this.products = all)),
             switchMap(() => this.route.queryParams),
@@ -57,5 +42,10 @@ export class ProductsComponent implements OnInit {
                     : this.products
             )
         );
+    }
+
+    onBasketUpdate(item: BasketItem) {
+        if (item.quantity > 0) this.basketSvc.addItem(item);
+        else this.basketSvc.removeItem(item);
     }
 }

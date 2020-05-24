@@ -1,38 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Product } from 'src/app/shared/models/product';
-import { BasketService } from 'src/app/shared/services/basket.service';
+import { Product } from '../../models/product';
+import { Basket, BasketItem } from '../../models/basket';
 
 @Component({
     selector: 'app-product-card',
     templateUrl: './product-card.component.html',
     styleUrls: ['./product-card.component.css'],
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent {
     @Input()
     product: Product;
 
     @Input()
     preview = false;
 
-    basketQuantity$: Observable<number>;
+    @Input()
+    basket: Basket;
 
-    constructor(private basketSvc: BasketService) {}
+    @Output()
+    basketUpdate = new EventEmitter<BasketItem>();
 
-    ngOnInit(): void {
-        // initialize basket item quantity or default to 0
-        this.basketQuantity$ = this.basketSvc
-            .get(this.product.key)
-            .pipe(map((item) => item?.quantity || 0));
+    get basketItem() {
+        return (this.basket?.items || {})[this.product.key];
     }
 
-    onIncreaseBasketItem() {
-        this.basketSvc.addItem(this.product);
-    }
-
-    onDecreaseBasketItem() {
-        this.basketSvc.removeItem(this.product);
+    onQuantityUpdate(quantity: number) {
+        this.basketUpdate.emit({ ...this.product, quantity });
     }
 }

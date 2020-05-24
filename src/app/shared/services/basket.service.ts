@@ -9,70 +9,80 @@ import { Product } from '../models/product';
     providedIn: 'root',
 })
 export class BasketService {
-    private basket$ = new BehaviorSubject<Basket>({});
+    private basket$ = new BehaviorSubject<Basket>(null);
 
     constructor() {
-        // try to load it from local storage
-        const basket = localStorage.getItem('basket');
-        this.basket$.next(basket ? JSON.parse(basket) : {});
+        this.load();
+    }
 
-        // automatic write-out to cachte
+    get count$() {
+        return this.getItems().pipe(map((items) => items.length));
+    }
+
+    get total$() {
+        return this.getItems().pipe(
+            map((items) => items.map((item) => item.price * item.quantity)),
+            map((prices) => prices.reduce((sum, price) => sum + price, 0))
+        );
+    }
+
+    get() {
+        return this.basket$.asObservable();
+    }
+
+    getItems() {
+        return this.get().pipe(
+            map((basket) => basket.items),
+            map((items) => Object.values(items))
+        );
+    }
+
+    addItem(product: Product) {
+        const { key } = product;
+        const { items } = this.basket$.value;
+        const item = items[key] || { ...product, quantity: 0 };
+
+        // update
+        item.quantity += 1;
+
+        this.basket$.next({
+            ...this.basket$.value,
+            items: { ...items, [key]: item },
+        });
+    }
+
+    removeItem(product: Product) {
+        const { key } = product;
+        const { items } = this.basket$.value;
+
+        // update (or delete if 0)
+        items[key].quantity -= 1;
+        if (!items[key].quantity) delete items[key];
+
+        this.basket$.next({
+            ...this.basket$.value,
+            items: { ...items },
+        });
+    }
+
+    clear() {
+        this.basket$.next({ ...this.basket$.value, items: {} });
+    }
+
+    // HELPERS /////////////////////////////////////////////////////////////////////////////////////
+
+    private load() {
+        // try to load it from cache storage
+        const basket = localStorage.getItem('basket');
+        this.basket$.next(basket ? JSON.parse(basket) : this.create());
+
+        // auto-write to cache on every update
         this.basket$.subscribe((basket) => {
             localStorage.setItem('basket', JSON.stringify(basket));
         });
     }
 
-    get count$() {
-        return this.getAll().pipe(map((items) => items.length));
-    }
-
-    get total$() {
-        return this.getAll().pipe(
-            map((items) =>
-                items.map(({ price, quantity }) => price * quantity)
-            ),
-            map((prices) => prices.reduce((sum, price) => sum + price, 0))
-        );
-    }
-
-    getAll() {
-        return this.basket$
-            .asObservable()
-            .pipe(map((basket) => Object.values(basket)));
-    }
-
-    get(id: string) {
-        return this.basket$.pipe(map((basket) => basket[id]));
-    }
-
-    addItem(product: Product) {
-        const { key } = product;
-        const next = this.basket$.value;
-        const item = next[key] || { ...product, quantity: 0 };
-
-        // update
-        item.quantity += 1;
-
-        this.basket$.next({ ...next, [key]: item });
-    }
-
-    removeItem(product: Product) {
-        const { key } = product;
-        const next = this.basket$.value;
-        const item = next[key];
-
-        // update
-        item.quantity -= 1;
-
-        if (!item.quantity) {
-            delete next[key];
-            this.basket$.next({ ...next });
-        } else {
-            this.basket$.next({ ...next, [key]: item });
-        }
-    }
-
-    clear() {
-        this.basket$.next({});
+    private create() {
+        return { items: {}, createdAt: new Date().getTime() };
     }
 }

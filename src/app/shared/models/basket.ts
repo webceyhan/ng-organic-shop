@@ -5,5 +5,6 @@ export interface BasketItem extends Product {
 }
 
 export interface Basket {
-    [key: string]: BasketItem;
+    items: { [key: string]: BasketItem };
+    createdAt: number;
 }

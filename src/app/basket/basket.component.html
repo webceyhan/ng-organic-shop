@@ -1,7 +1,7 @@
 <h1 class="display-4">Basket</h1>
 
 <p class="lead text-muted">
-    You have {{ itemCount$ | async }} items in your basket.
+    You have {{ count$ | async }} items in your basket.
 </p>
 
 <br />
@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of items$ | async">
+        <tr *ngFor="let item of items$ | async as items">
             <th class="d-none d-md-table-cell">
                 <img class="rounded-circle" [src]="item.imageUrl" />
             </th>
@@ -47,6 +47,8 @@
 <hr />
 
 <div class="d-flex justify-content-between align-items-center">
-    <button class="btn btn-warning" (click)="onClear()">Clear Basket</button>
+    <button class="btn btn-warning" (click)="onClear()">
+        Clear Basket
+    </button>
     <h4>Total: {{ total$ | async | currency }}</h4>
 </div>

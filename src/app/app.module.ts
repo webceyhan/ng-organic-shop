@@ -11,6 +11,7 @@ import { BasketComponent } from './basket/basket.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { OrdersComponent } from './orders/orders.component';
+import { BasketEmptyComponent } from './basket/basket-empty/basket-empty.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { OrdersComponent } from './orders/orders.component';
         CheckoutComponent,
         OrderSuccessComponent,
         OrdersComponent,
+        BasketEmptyComponent,
     ],
     imports: [
         BrowserModule,
