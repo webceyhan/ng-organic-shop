@@ -1,0 +1,10 @@
+<ng-container *ngIf="value">
+    <button class="btn btn-light btn-sm mr-2" (click)="onChange(-1)">
+        <i class="fas fa-minus"></i>
+    </button>
+    <span class="badge badge-light mr-2">{{ value }}</span>
+</ng-container>
+
+<button class="btn btn-primary btn-sm" (click)="onChange(1)">
+    <i class="fas fa-shopping-cart"></i>
+</button>

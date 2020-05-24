@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Basket } from '../models/basket';
+import { Basket, BasketItem } from '../models/basket';
 import { Product } from '../models/product';
 
 @Injectable({
@@ -35,6 +35,21 @@ export class BasketService {
             map((basket) => basket.items),
             map((items) => Object.values(items))
         );
+    }
+
+    updateItem(item: BasketItem) {
+        const { key } = item;
+        const next = this.basket$.value;
+
+        // update
+        next.items[key] = { ...item };
+
+        // delete if quantity = 0
+        if (!item.quantity) {
+            delete next.items[key];
+        }
+
+        this.basket$.next({ ...next });
     }
 
     addItem(product: Product) {
