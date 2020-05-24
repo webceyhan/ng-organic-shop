@@ -3,11 +3,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { Shipping } from '../../models/Shipping';
 
 @Component({
-    selector: 'app-order-form',
-    templateUrl: './order-form.component.html',
-    styleUrls: ['./order-form.component.css'],
+    selector: 'app-shipping-form',
+    templateUrl: './shipping-form.component.html',
+    styleUrls: ['./shipping-form.component.css'],
 })
-export class OrderFormComponent {
+export class ShippingFormComponent {
     @Output()
     save = new EventEmitter<Shipping>();
 
