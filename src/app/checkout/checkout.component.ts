@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketService } from '../shared/services/basket.service';
 import { Observable } from 'rxjs';
+
+import { BasketService } from '../shared/services/basket.service';
 import { BasketItem } from '../shared/models/basket';
+import { Shipping } from '../shared/models/Shipping';
 
 @Component({
     selector: 'app-checkout',
@@ -15,7 +17,11 @@ export class CheckoutComponent implements OnInit {
     constructor(private basketSvc: BasketService) {}
 
     ngOnInit(): void {
-        this.items$ = this.basketSvc.getItems()
+        this.items$ = this.basketSvc.getItems();
         this.total$ = this.basketSvc.total$;
+    }
+
+    onOrder(shipping: Shipping) {
+        console.log(shipping);
     }
 }

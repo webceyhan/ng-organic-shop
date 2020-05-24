@@ -1,16 +1,6 @@
 <div class="row">
     <div class="col-md-6">
-        <form>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input id="name" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input id="address" type="text" class="form-control" />
-            </div>
-            <button class="btn btn-primary">Place Order</button>
-        </form>
+        <app-order-form (save)="onOrder($event)"></app-order-form>
     </div>
 
     <div class="col-md-6">

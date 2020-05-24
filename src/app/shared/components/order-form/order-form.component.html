@@ -1,0 +1,43 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input
+            #name="ngModel"
+            id="name"
+            name="name"
+            type="text"
+            class="form-control"
+            ngModel
+            required
+        />
+        <small
+            class="form-text text-danger"
+            *ngIf="name.touched && name.invalid"
+        >
+            <span *ngIf="name.errors.required">
+                Name is required.
+            </span>
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="address">Address</label>
+        <input
+            #address="ngModel"
+            id="address"
+            name="address"
+            type="text"
+            class="form-control"
+            ngModel
+            required
+        />
+        <small
+            class="form-text text-danger"
+            *ngIf="address.touched && address.invalid"
+        >
+            <span *ngIf="address.errors.required">
+                Address is required.
+            </span>
+        </small>
+    </div>
+    <button class="btn btn-primary" [disabled]="f.invalid">Place Order</button>
+</form>
