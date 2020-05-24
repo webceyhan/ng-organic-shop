@@ -7,12 +7,14 @@ import { UrlValidator } from './validators/url.validator';
 import { MinValidator } from './validators/min.validator';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { QuanntityInputComponent } from './components/quanntity-input/quanntity-input.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 
 const DECLARATIONS = [
     UrlValidator,
     MinValidator,
     ProductCardComponent,
     QuanntityInputComponent,
+    OrderSummaryComponent,
 ];
 
 @NgModule({

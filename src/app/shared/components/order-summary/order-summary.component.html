@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Order Summary</h4>
+        <p class="card-text">
+            You have {{ items?.length || 0 }} items in your shopping cart
+        </p>
+
+        <ul class="list-group list-group-flush">
+            <li
+                class="list-group-item d-flex justify-content-between"
+                *ngFor="let item of items"
+            >
+                <span>{{ item.quantity }} x {{ item.title }}</span>
+                <span>{{ item.price * item.quantity | currency }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <strong>Total</strong>
+                <strong>{{ total | currency }}</strong>
+            </li>
+        </ul>
+    </div>
+</div>

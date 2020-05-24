@@ -14,27 +14,9 @@
     </div>
 
     <div class="col-md-6">
-        <div class="card" *ngIf="items$ | async as items">
-            <div class="card-body">
-                <h4 class="card-title">Order Summery</h4>
-                <p class="card-text">
-                    You have {{ items.length }} items in your shopping cart
-                </p>
-
-                <ul class="list-group list-group-flush">
-                    <li
-                        class="list-group-item d-flex justify-content-between"
-                        *ngFor="let item of items"
-                    >
-                        <span>{{ item.quantity }} x {{ item.title }}</span>
-                        <span>{{ item.price * item.quantity | currency }}</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <strong>Total</strong>
-                        <strong>{{ total$ | async | currency }}</strong>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <app-order-summary
+            [items]="items$ | async"
+            [total]="total$ | async"
+        ></app-order-summary>
     </div>
 </div>
