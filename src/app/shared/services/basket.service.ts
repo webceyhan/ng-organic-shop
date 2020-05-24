@@ -83,6 +83,6 @@ export class BasketService {
     }
 
     private create() {
-        return { items: {}, createdAt: new Date().getTime() };
+        return { items: {}, timestamp: new Date().getTime() };
     }
 }

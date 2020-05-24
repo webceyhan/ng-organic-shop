@@ -6,5 +6,5 @@ export interface BasketItem extends Product {
 
 export interface Basket {
     items: { [key: string]: BasketItem };
-    createdAt: number;
+    timestamp: number;
 }
