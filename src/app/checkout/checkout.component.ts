@@ -34,10 +34,8 @@ export class CheckoutComponent implements OnInit {
         const { uid } = await this.authSvc.state$.pipe(take(1)).toPromise();
         const items = await this.items$.pipe(take(1)).toPromise();
         const order = this.orderSvc.prepare(uid, shipping, items);
-
         const result = await this.orderSvc.store(order);
-
-        this.basketSvc.clear();
+        
         this.router.navigate(['/orders', result.key]);
     }
 }

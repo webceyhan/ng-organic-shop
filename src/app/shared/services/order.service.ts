@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 
+import { BasketService } from './basket.service';
 import { Order, OrderItem } from '../models/order';
 import { BasketItem } from '../models/basket';
 import { Shipping } from '../models/Shipping';
@@ -9,10 +10,15 @@ import { Shipping } from '../models/Shipping';
     providedIn: 'root',
 })
 export class OrderService {
-    constructor(private db: AngularFireDatabase) {}
+    constructor(
+        private db: AngularFireDatabase,
+        private basketSvc: BasketService
+    ) {}
 
-    store(order: Order) {
-        return this.db.list('orders').push(order);
+    async store(order: Order) {
+        const result = await this.db.list('orders').push(order);
+        this.basketSvc.clear();
+        return result;
     }
 
     // HELPERS /////////////////////////////////////////////////////////////////////////////////////
