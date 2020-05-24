@@ -27,10 +27,10 @@ export class BasketComponent implements OnInit {
     }
 
     onIncreaseBasketItem(item) {
-        this.basketSvc.increase(item);
+        this.basketSvc.addItem(item);
     }
 
     onDecreaseBasketItem(item) {
-        this.basketSvc.decrease(item);
+        this.basketSvc.removeItem(item);
     }
 }

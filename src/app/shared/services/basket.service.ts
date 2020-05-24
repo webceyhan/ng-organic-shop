@@ -45,7 +45,7 @@ export class BasketService {
         return this.basket$.pipe(map((basket) => basket[id]));
     }
 
-    increase(product: Product) {
+    addItem(product: Product) {
         const { key } = product;
         const next = this.basket$.value;
         const item = next[key] || { ...product, quantity: 0 };
@@ -56,7 +56,7 @@ export class BasketService {
         this.basket$.next({ ...next, [key]: item });
     }
 
-    decrease(product: Product) {
+    removeItem(product: Product) {
         const { key } = product;
         const next = this.basket$.value;
         const item = next[key];

@@ -29,10 +29,10 @@ export class ProductCardComponent implements OnInit {
     }
 
     onIncreaseBasketItem() {
-        this.basketSvc.increase(this.product);
+        this.basketSvc.addItem(this.product);
     }
 
     onDecreaseBasketItem() {
-        this.basketSvc.decrease(this.product);
+        this.basketSvc.removeItem(this.product);
     }
 }
