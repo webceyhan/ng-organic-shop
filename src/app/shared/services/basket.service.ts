@@ -28,7 +28,7 @@ export class BasketService {
 
     get() {
         return this.id$.pipe(
-            map((id) => this.db.object<Basket>('baskets/' + id)),
+            map((id) => this.getRef(id)),
             switchMap((ref) => ref.valueChanges())
         );
     }
@@ -41,9 +41,8 @@ export class BasketService {
     }
 
     async updateItem(item: BasketItem) {
-        const itemId = item.key;
-        const id = await this.id$.pipe(take(1)).toPromise();
-        const ref = this.db.object('baskets/' + id + '/items/' + itemId);
+        const basketId = await this.id$.pipe(take(1)).toPromise();
+        const ref = this.getItemRef(item.key, basketId);
 
         // update or delete if quantity = 0
         item.quantity ? ref.update(item) : ref.remove();
@@ -58,6 +57,16 @@ export class BasketService {
 
     // HELPERS /////////////////////////////////////////////////////////////////////////////////////
 
+    private getRef(id: string) {
+        return this.db.object<Basket>('baskets/' + id);
+    }
+
+    private getItemRef(id: string, baskeId: string) {
+        return this.db.object<BasketItem>(
+            'baskets/' + baskeId + '/items/' + id
+        );
+    }
+
     private async load() {
         // try to load it from cache storage
         const id = localStorage.getItem('basketId');
@@ -67,8 +76,11 @@ export class BasketService {
     }
 
     private async create() {
-        const basket = { items: {}, timestamp: new Date().getTime() };
-        const result = await this.db.list('baskets').push(basket);
+        const ref = this.db.list('baskets');
+        const result = await ref.push({
+            items: {}, //todo: not stored??
+            timestamp: new Date().getTime(),
+        });
 
         // cache
         localStorage.setItem('basketId', result.key);
