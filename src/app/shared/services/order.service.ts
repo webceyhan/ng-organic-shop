@@ -18,6 +18,10 @@ export class OrderService {
         private basketSvc: BasketService
     ) {}
 
+    getById(id: string) {
+        return this.db.object<Order>('orders/' + id).valueChanges();
+    }
+
     get(): Observable<Order[]> {
         return this.db
             .list<Order>('orders')

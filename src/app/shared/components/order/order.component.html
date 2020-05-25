@@ -1,0 +1,25 @@
+<ng-container *ngIf="order$ | async as order">
+    <h1 class="display-4">Order</h1>
+
+    <hr />
+
+    <p class="lead d-flex justify-content-between mb-4">
+        <span>{{ order.user.name }}</span>
+        <span class="text-muted">{{ order.timestamp | date }}</span>
+    </p>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Shipping Address</h4>
+            <p class="card-text">
+                <span>{{ order.shipping.name }}</span> -
+                <span>
+                    {{ order.shipping.address }},
+                    {{ order.shipping.city }}
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <app-order-summary [items]="order.items"></app-order-summary>
+</ng-container>

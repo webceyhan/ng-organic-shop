@@ -10,15 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrdersComponent } from './orders/orders.component';
-import { OrderComponent } from './orders/order/order.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        CheckoutComponent,
-        OrdersComponent,
-        OrderComponent,
-    ],
+    declarations: [AppComponent, CheckoutComponent, OrdersComponent],
     imports: [
         BrowserModule,
         CoreModule,

@@ -1,4 +1,5 @@
 import { Shipping } from './Shipping';
+import { User } from './user';
 
 export interface OrderItem {
     title: string;
@@ -11,6 +12,7 @@ export interface OrderItem {
 export interface Order {
     key?: string;
     userId: string;
+    user?: User;
     items: OrderItem[];
     shipping: Shipping;
     timestamp: number;

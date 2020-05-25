@@ -9,6 +9,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { QuanntityInputComponent } from './components/quanntity-input/quanntity-input.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
+import { OrderComponent } from './components/order/order.component';
 
 const DECLARATIONS = [
     UrlValidator,
@@ -17,6 +18,7 @@ const DECLARATIONS = [
     QuanntityInputComponent,
     OrderSummaryComponent,
     ShippingFormComponent,
+    OrderComponent,
 ];
 
 @NgModule({
