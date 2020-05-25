@@ -30,7 +30,7 @@ export class ProductsComponent implements OnInit {
 
     ngOnInit(): void {
         this.basket$ = this.basketSvc.get();
-        this.categories$ = this.categorySvc.getAll();
+        this.categories$ = this.categorySvc.list();
 
         this.filteredProducts$ = this.productSvc.getAll().pipe(
             tap((all) => (this.products = all)),

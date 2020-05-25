@@ -31,7 +31,7 @@ export class ProductFormComponent implements OnInit {
                 .subscribe((p) => (this.product = p));
         }
 
-        this.categories$ = this.categorySvc.getAll();
+        this.categories$ = this.categorySvc.list();
     }
 
     onSave() {
