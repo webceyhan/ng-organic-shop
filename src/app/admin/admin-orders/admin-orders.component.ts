@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { OrderService } from 'src/app/shared/services/order.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Order } from 'src/app/shared/models/order';
-import { User } from 'src/app/shared/models/user';
-import { map } from 'rxjs/operators';
-
-type OrderWithUser = Order & { user: User };
 
 @Component({
     selector: 'app-admin-orders',
@@ -15,7 +12,7 @@ type OrderWithUser = Order & { user: User };
     styleUrls: ['./admin-orders.component.css'],
 })
 export class AdminOrdersComponent implements OnInit {
-    orders$: Observable<OrderWithUser[]>;
+    orders$: Observable<Order[]>;
 
     constructor(private userSvc: UserService, private orderSvc: OrderService) {}
 
@@ -32,13 +29,10 @@ export class AdminOrdersComponent implements OnInit {
                     {}
                 );
 
-                return orders.map(
-                    (order) =>
-                        ({
-                            ...order,
-                            user: usersMap[order.userId],
-                        } as OrderWithUser)
-                );
+                return orders.map((order) => ({
+                    ...order,
+                    user: usersMap[order.userId],
+                }));
             })
         );
     }
