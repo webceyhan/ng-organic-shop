@@ -6,14 +6,18 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { SharedModule } from 'shared/shared.module';
 import { CoreRoutingModule } from './core-routing.module';
+import { LayoutComponent } from './layout/layout.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 
-const DECLARATIONS = [NavbarComponent, LoginComponent, HomeComponent];
-
 @NgModule({
-    declarations: DECLARATIONS,
+    declarations: [
+        LayoutComponent,
+        NavbarComponent,
+        LoginComponent,
+        HomeComponent,
+    ],
     imports: [
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
@@ -21,6 +25,6 @@ const DECLARATIONS = [NavbarComponent, LoginComponent, HomeComponent];
         CoreRoutingModule,
         SharedModule,
     ],
-    exports: [...DECLARATIONS],
+    exports: [LayoutComponent],
 })
 export class CoreModule {}
