@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Category } from 'src/app/shared/models/category';
+import { Category } from 'shared/models/category';
 
 @Component({
     selector: 'app-product-filter',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { BasketService } from '../shared/services/basket.service';
-import { BasketItem } from '../shared/models/basket';
+import { BasketService } from 'shared/services/basket.service';
+import { BasketItem } from 'shared/models/basket';
 
 @Component({
     selector: 'app-basket',

@@ -3,12 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap, switchMap, map } from 'rxjs/operators';
 
-import { BasketService } from '../shared/services/basket.service';
-import { ProductService } from '../shared/services/product.service';
-import { CategoryService } from '../shared/services/category.service';
-import { Category } from '../shared/models/category';
-import { Product } from '../shared/models/product';
-import { Basket, BasketItem } from '../shared/models/basket';
+import { BasketService } from 'shared/services/basket.service';
+import { ProductService } from 'shared/services/product.service';
+import { CategoryService } from 'shared/services/category.service';
+import { Category } from 'shared/models/category';
+import { Product } from 'shared/models/product';
+import { Basket, BasketItem } from 'shared/models/basket';
 
 @Component({
     selector: 'app-products',

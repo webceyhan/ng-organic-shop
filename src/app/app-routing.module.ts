@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrdersComponent } from './orders/orders.component';
-import { OrderComponent } from './shared/components/order/order.component';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { OrderComponent } from 'shared/components/order/order.component';
+import { AuthGuard } from 'shared/guards/auth.guard';
 
 const routes: Routes = [
     {

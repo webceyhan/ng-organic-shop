@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from '../../shared/models/user';
-import { AuthService } from '../../shared/services/auth.service';
-import { BasketService } from 'src/app/shared/services/basket.service';
+import { User } from 'shared/models/user';
+import { AuthService } from 'shared/services/auth.service';
+import { BasketService } from 'shared/services/basket.service';
 
 @Component({
     selector: 'app-navbar',
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
         private router: Router,
         private authSvc: AuthService,
         private basketSvc: BasketService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.authSvc.user$.subscribe((user) => (this.user = user));

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { OrderService } from 'src/app/shared/services/order.service';
-import { UserService } from 'src/app/shared/services/user.service';
-import { Order } from 'src/app/shared/models/order';
+import { OrderService } from 'shared/services/order.service';
+import { UserService } from 'shared/services/user.service';
+import { Order } from 'shared/models/order';
 
 @Component({
     selector: 'app-admin-orders',

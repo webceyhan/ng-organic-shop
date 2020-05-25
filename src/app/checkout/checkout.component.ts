@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { AuthService } from '../shared/services/auth.service';
-import { OrderService } from '../shared/services/order.service';
-import { BasketService } from '../shared/services/basket.service';
-import { BasketItem } from '../shared/models/basket';
-import { Shipping } from '../shared/models/Shipping';
+import { AuthService } from 'shared/services/auth.service';
+import { OrderService } from 'shared/services/order.service';
+import { BasketService } from 'shared/services/basket.service';
+import { BasketItem } from 'shared/models/basket';
+import { Shipping } from 'shared/models/Shipping';
 import { Router } from '@angular/router';
 
 @Component({
@@ -35,7 +35,7 @@ export class CheckoutComponent implements OnInit {
         const items = await this.items$.pipe(take(1)).toPromise();
         const order = this.orderSvc.prepare(uid, shipping, items);
         const result = await this.orderSvc.store(order);
-        
+
         this.router.navigate(['/orders', result.key]);
     }
 }
