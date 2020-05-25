@@ -21,5 +21,8 @@
         </div>
     </div>
 
-    <app-order-summary [items]="order.items"></app-order-summary>
+    <app-order-summary
+        [items]="order.items"
+        [total]="order.total"
+    ></app-order-summary>
 </ng-container>

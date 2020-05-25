@@ -27,6 +27,13 @@ export class OrderComponent implements OnInit {
             switchMap((id) => (id ? this.orderSvc.getById(id) : of())),
             switchMap((order: Order) => {
                 if (!order) return of();
+
+                // pre-calculate total sum of all items
+                order.total = order.items.reduce(
+                    (sum, i) => sum + i.price * i.quantity,
+                    0
+                );
+
                 return this.userSvc
                     .get(order.userId)
                     .pipe(map((user) => ({ ...order, user })));

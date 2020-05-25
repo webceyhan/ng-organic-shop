@@ -16,4 +16,5 @@ export interface Order {
     items: OrderItem[];
     shipping: Shipping;
     timestamp: number;
+    total?: number;
 }
