@@ -34,17 +34,14 @@ export class ProductFormComponent implements OnInit {
         this.categories$ = this.categorySvc.list();
     }
 
-    onSave() {
-        this.product.key
-            ? this.productSvc.update(this.product)
-            : this.productSvc.create(this.product);
-
+    async onSave() {
+        await this.productSvc.save(this.product);
         this.router.navigate(['/admin/products']);
     }
 
-    onDelete() {
+    async onDelete() {
         if (confirm('Are you sure to delete this product?')) {
-            this.productSvc.remove(this.product.key);
+            await this.productSvc.remove(this.product.id);
             this.router.navigate(['/admin/products']);
         }
     }

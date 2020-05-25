@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit {
         this.basket$ = this.basketSvc.get();
         this.categories$ = this.categorySvc.list();
 
-        this.filteredProducts$ = this.productSvc.getAll().pipe(
+        this.filteredProducts$ = this.productSvc.list().pipe(
             tap((all) => (this.products = all)),
             switchMap(() => this.route.queryParams),
             map((params) => params.category),

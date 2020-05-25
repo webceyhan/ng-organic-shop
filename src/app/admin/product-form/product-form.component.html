@@ -64,7 +64,7 @@
                     <option value=""></option>
                     <option
                         *ngFor="let category of categories$ | async"
-                        [value]="category.key"
+                        [value]="category.id"
                     >
                         {{ category.name }}
                     </option>
@@ -109,7 +109,7 @@
                 type="button"
                 class="btn btn-danger"
                 (click)="onDelete()"
-                *ngIf="product.key"
+                *ngIf="product.id"
             >
                 Delete
             </button>

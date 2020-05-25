@@ -42,7 +42,7 @@ export class BasketService {
 
     async updateItem(item: BasketItem) {
         const basketId = await this.id$.pipe(take(1)).toPromise();
-        const ref = this.getItemRef(item.key, basketId);
+        const ref = this.getItemRef(item.id, basketId);
 
         // update or delete if quantity = 0
         item.quantity ? ref.update(item) : ref.remove();

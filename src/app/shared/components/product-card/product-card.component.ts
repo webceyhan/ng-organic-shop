@@ -22,7 +22,7 @@ export class ProductCardComponent {
     basketUpdate = new EventEmitter<BasketItem>();
 
     get basketItem() {
-        return (this.basket?.items || {})[this.product.key];
+        return (this.basket?.items || {})[this.product.id];
     }
 
     onQuantityUpdate(quantity: number) {
