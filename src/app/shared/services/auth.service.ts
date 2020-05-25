@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
-import * as firebase from 'firebase';
+import { auth } from 'firebase/app';
 
 import { UserService } from './user.service';
 import { User } from '../models/user';
@@ -41,7 +41,7 @@ export class AuthService {
         localStorage.setItem('redirect', redirect || '/');
 
         // bugfix: signInWithRedirect().then() promise not working
-        this.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+        this.auth.signInWithRedirect(new auth.GoogleAuthProvider());
     }
 
     logout() {
