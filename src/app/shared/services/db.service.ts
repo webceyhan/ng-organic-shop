@@ -3,11 +3,7 @@ import { AngularFireDatabase, QueryFn } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-interface Model {
-    id?: string;
-    createdAt?: number;
-    updatedAt?: number;
-}
+import { Model } from 'shared/models/model';
 
 @Injectable({
     providedIn: 'root',
