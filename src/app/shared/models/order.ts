@@ -9,6 +9,7 @@ export interface OrderItem {
 }
 
 export interface Order {
+    key?: string;
     userId: string;
     items: OrderItem[];
     shipping: Shipping;

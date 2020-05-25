@@ -1,1 +1,22 @@
-<p>admin-orders works!</p>
+<h1 class="display-4">Orders</h1>
+
+<table class="table table-hover">
+    <thead class="thead-light">
+        <tr>
+            <th>Customer</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders$ | async">
+            <td>{{ order.user.name }}</td>
+            <td>{{ order.timestamp | date }}</td>
+            <td>
+                <a class="mr-2" [routerLink]="['/admin/orders', order.key]"
+                    >View</a
+                >
+            </td>
+        </tr>
+    </tbody>
+</table>
