@@ -13,15 +13,14 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: 'orders/:id',
+        component: OrderComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: 'orders',
         component: OrdersComponent,
         canActivate: [AuthGuard],
-        children: [
-            {
-                path: ':id',
-                component: OrderComponent,
-            },
-        ],
     },
 ];
 

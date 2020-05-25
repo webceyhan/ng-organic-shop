@@ -24,8 +24,13 @@ export class AuthService {
 
     get user$() {
         return this.state$.pipe(
-            switchMap((user) => (user ? this.userSvc.get(user.uid) : of(null))),
-            map(user => user as User)
+            switchMap((state) => {
+                if (!state) return of();
+                return this.userSvc
+                    .get(state.uid)
+                    .pipe(map((user) => ({ ...user, key: state.uid })));
+            }),
+            map((user) => user as User)
         );
     }
 
