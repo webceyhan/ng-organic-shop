@@ -10,12 +10,15 @@
     </thead>
     <tbody>
         <tr *ngFor="let order of orders$ | async">
-            <td>{{ order.user.name }}</td>
-            <td>{{ order.createdAt | date }}</td>
+            <td class="w-50">{{ order.user.name }}</td>
+            <td class="w-25">{{ order.createdAt | date }}</td>
             <td>
-                <a class="mr-2" [routerLink]="['/admin/orders', order.id]"
+                <a class="btn btn-link" [routerLink]="['/admin/orders', order.id]"
                     >View</a
                 >
+                <button type="button" class="btn btn-link" (click)="onRemove(order.id)">
+                    Remove
+                </button>
             </td>
         </tr>
     </tbody>

@@ -36,4 +36,8 @@ export class AdminOrdersComponent implements OnInit {
             })
         );
     }
+
+    onRemove(id: string) {
+        this.orderSvc.remove(id);
+    }
 }
