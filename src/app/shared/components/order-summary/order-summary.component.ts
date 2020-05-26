@@ -12,6 +12,9 @@ export class OrderSummaryComponent {
     items: BasketItem[] = [];
 
     get total() {
-        return this.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+        return (this.items || []).reduce(
+            (sum, i) => sum + i.price * i.quantity,
+            0
+        );
     }
 }
