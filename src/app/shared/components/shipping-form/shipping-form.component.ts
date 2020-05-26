@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { Shipping } from '../../models/Shipping';
+import { Shipping } from '../../models/shipping';
 
 @Component({
     selector: 'app-shipping-form',

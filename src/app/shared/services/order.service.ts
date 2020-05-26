@@ -1,47 +1,18 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
-import { BasketService } from './basket.service';
+import { DBService } from './db.service';
 import { Order, OrderItem } from '../models/order';
 import { BasketItem } from '../models/basket';
-import { Shipping } from '../models/Shipping';
-import { keyedList } from '../helpers';
+import { Shipping } from '../models/shipping';
 
 @Injectable({
     providedIn: 'root',
 })
-export class OrderService {
-    constructor(
-        private db: AngularFireDatabase,
-        private basketSvc: BasketService
-    ) {}
+export class OrderService extends DBService<Order> {
+    path = 'orders';
 
-    getById(id: string) {
-        return this.db.object<Order>('orders/' + id).valueChanges();
-    }
-
-    get(): Observable<Order[]> {
-        return this.db
-            .list<Order>('orders')
-            .snapshotChanges()
-            .pipe(map(keyedList));
-    }
-
-    getByUser(userId: string): Observable<Order[]> {
-        return this.db
-            .list<Order>('orders', (ref) =>
-                ref.orderByChild('userId').equalTo(userId)
-            )
-            .snapshotChanges()
-            .pipe(map(keyedList));
-    }
-
-    async store(order: Order) {
-        const result = await this.db.list('orders').push(order);
-        this.basketSvc.clear();
-        return result;
+    listByUser(userId: string) {
+        return this.list((ref) => ref.orderByChild('userId').equalTo(userId));
     }
 
     // HELPERS /////////////////////////////////////////////////////////////////////////////////////

@@ -10,10 +10,10 @@
     </thead>
     <tbody>
         <tr *ngFor="let order of orders$ | async">
-            <td>{{ order.key }}</td>
-            <td>{{ order.timestamp | date }}</td>
+            <td>{{ order.id }}</td>
+            <td>{{ order.createdAt | date }}</td>
             <td>
-                <a class="mr-2" [routerLink]="['/orders', order.key]"
+                <a class="mr-2" [routerLink]="['/orders', order.id]"
                     >View</a
                 >
             </td>

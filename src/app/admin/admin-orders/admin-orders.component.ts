@@ -18,7 +18,7 @@ export class AdminOrdersComponent implements OnInit {
 
     ngOnInit(): void {
         const users$ = this.userSvc.list();
-        const orders$ = this.orderSvc.get();
+        const orders$ = this.orderSvc.list();
         const all$ = combineLatest(users$, orders$);
 
         this.orders$ = all$.pipe(

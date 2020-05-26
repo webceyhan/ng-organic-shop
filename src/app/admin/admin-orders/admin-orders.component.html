@@ -11,9 +11,9 @@
     <tbody>
         <tr *ngFor="let order of orders$ | async">
             <td>{{ order.user.name }}</td>
-            <td>{{ order.timestamp | date }}</td>
+            <td>{{ order.createdAt | date }}</td>
             <td>
-                <a class="mr-2" [routerLink]="['/admin/orders', order.key]"
+                <a class="mr-2" [routerLink]="['/admin/orders', order.id]"
                     >View</a
                 >
             </td>

@@ -24,7 +24,7 @@ export class OrderComponent implements OnInit {
     ngOnInit(): void {
         this.order$ = this.route.params.pipe(
             map((params) => params.id),
-            switchMap((id) => (id ? this.orderSvc.getById(id) : of())),
+            switchMap((id) => (id ? this.orderSvc.get(id) : of())),
             switchMap((order: Order) => {
                 if (!order) return of();
 

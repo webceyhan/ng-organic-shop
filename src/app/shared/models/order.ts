@@ -1,7 +1,8 @@
-import { Shipping } from './Shipping';
+import { Model } from './model';
+import { Shipping } from './shipping';
 import { User } from './user';
 
-export interface OrderItem {
+export interface OrderItem extends Model {
     title: string;
     imageUrl: string;
     price: number;
@@ -9,12 +10,10 @@ export interface OrderItem {
     total: number;
 }
 
-export interface Order {
-    key?: string;
+export interface Order extends Model {
     userId: string;
     user?: User;
     items: OrderItem[];
     shipping: Shipping;
-    timestamp: number;
     total?: number;
 }
