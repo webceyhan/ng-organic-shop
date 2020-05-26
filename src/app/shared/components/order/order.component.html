@@ -4,7 +4,7 @@
     <hr />
 
     <p class="lead d-flex justify-content-between mb-4">
-        <span>{{ order.user.name }}</span>
+        <span>{{ (user$ | async)?.name }}</span>
         <span class="text-muted">{{ order.createdAt | date }}</span>
     </p>
 
@@ -21,8 +21,5 @@
         </div>
     </div>
 
-    <app-order-summary
-        [items]="order.items"
-        [total]="order.total"
-    ></app-order-summary>
+    <app-order-summary [items]="order.items"></app-order-summary>
 </ng-container>

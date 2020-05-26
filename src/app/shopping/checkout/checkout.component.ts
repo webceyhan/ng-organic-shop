@@ -16,10 +16,9 @@ import { Router } from '@angular/router';
 })
 export class CheckoutComponent implements OnInit {
     items$: Observable<BasketItem[]>;
-    total$: Observable<number>;
 
     constructor(
-        private router:Router,
+        private router: Router,
         private authSvc: AuthService,
         private orderSvc: OrderService,
         private basketSvc: BasketService
@@ -27,7 +26,6 @@ export class CheckoutComponent implements OnInit {
 
     ngOnInit(): void {
         this.items$ = this.basketSvc.listItems();
-        this.total$ = this.basketSvc.total$;
     }
 
     async onOrder(shipping: Shipping) {

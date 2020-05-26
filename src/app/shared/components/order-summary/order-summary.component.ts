@@ -11,6 +11,7 @@ export class OrderSummaryComponent {
     @Input()
     items: BasketItem[] = [];
 
-    @Input()
-    total = 0;
+    get total() {
+        return this.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+    }
 }
