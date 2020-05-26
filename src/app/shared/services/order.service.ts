@@ -18,22 +18,16 @@ export class OrderService extends DBService<Order> {
     // HELPERS /////////////////////////////////////////////////////////////////////////////////////
 
     prepare(userId, shipping: Shipping, basketItems: BasketItem[]) {
-        const items = this.prepareItems(basketItems);
-        const timestamp = new Date().getTime();
-
-        return { userId, timestamp, shipping, items } as Order;
-    }
-
-    private prepareItems(items: BasketItem[]) {
-        return items.map(
-            ({ title, imageUrl, price, quantity }) =>
-                ({
-                    title,
-                    imageUrl,
-                    price,
-                    quantity,
-                    total: price * quantity,
-                } as OrderItem)
+        const items: OrderItem[] = basketItems.map(
+            ({ title, imageUrl, price, quantity }) => ({
+                title,
+                imageUrl,
+                price,
+                quantity,
+                total: price * quantity,
+            })
         );
+
+        return { userId, shipping, items } as Order;
     }
 }
