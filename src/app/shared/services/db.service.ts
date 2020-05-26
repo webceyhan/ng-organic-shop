@@ -73,13 +73,13 @@ export class DBService<T extends Model> {
         const updatedAt = new Date().getTime();
         const data = { ...obj, updatedAt };
 
-        // remove id
-        delete data.id;
-
         // set create date if not exists yet
-        if (data.createdAt === null) {
+        if (!data.createdAt) {
             data.createdAt = updatedAt;
         }
+
+        // remove id
+        delete data.id;
 
         return data;
     }
