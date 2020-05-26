@@ -26,7 +26,7 @@ export class CheckoutComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.items$ = this.basketSvc.getItems();
+        this.items$ = this.basketSvc.listItems();
         this.total$ = this.basketSvc.total$;
     }
 

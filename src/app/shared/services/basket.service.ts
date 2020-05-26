@@ -1,39 +1,41 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 
 import { Basket, BasketItem } from '../models/basket';
+import { DBService } from './db.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class BasketService {
+export class BasketService extends DBService<Basket> {
+    path = 'baskets';
+
     private id$ = new ReplaySubject<string>(1);
 
-    constructor(private db: AngularFireDatabase) {
+    constructor(db: AngularFireDatabase) {
+        super(db);
         this.load();
     }
 
     get count$() {
-        return this.getItems().pipe(map((items) => items.length));
+        return this.listItems().pipe(map((items) => items.length));
     }
 
     get total$() {
-        return this.getItems().pipe(
+        return this.listItems().pipe(
             map((items) => items.map((item) => item.price * item.quantity)),
             map((prices) => prices.reduce((sum, price) => sum + price, 0))
         );
     }
 
-    get() {
-        return this.id$.pipe(
-            map((id) => this.getRef(id)),
-            switchMap((ref) => ref.valueChanges())
-        );
+    get(id?: string): Observable<Basket> {
+        if (id) return super.get(id);
+        return this.id$.pipe(switchMap((id) => super.get(id)));
     }
 
-    getItems() {
+    listItems(): Observable<BasketItem[]> {
         return this.get().pipe(
             map((basket) => basket.items || {}),
             map((items) => Object.values(items))
@@ -50,16 +52,10 @@ export class BasketService {
 
     async clear() {
         const id = await this.id$.pipe(take(1)).toPromise();
-        const ref = this.db.object('baskets/' + id);
-
-        ref.update({ items: {} });
+        this.objectRef(id).update({ items: {} });
     }
 
     // HELPERS /////////////////////////////////////////////////////////////////////////////////////
-
-    private getRef(id: string) {
-        return this.db.object<Basket>('baskets/' + id);
-    }
 
     private getItemRef(id: string, baskeId: string) {
         return this.db.object<BasketItem>(
@@ -69,22 +65,15 @@ export class BasketService {
 
     private async load() {
         // try to load it from cache storage
-        const id = localStorage.getItem('basketId');
+        let id = localStorage.getItem('basketId');
 
-        // use cached or create new basket
-        this.id$.next(id || (await this.create()));
-    }
+        // create default if not exists
+        if (!id) {
+            id = (await this.save({ items: {} })).id;
+            localStorage.setItem('basketId', id);
+        }
 
-    private async create() {
-        const ref = this.db.list('baskets');
-        const result = await ref.push({
-            items: {}, //todo: not stored??
-            timestamp: new Date().getTime(),
-        });
-
-        // cache
-        localStorage.setItem('basketId', result.key);
-
-        return result.key;
+        // emit basket id
+        this.id$.next(id);
     }
 }

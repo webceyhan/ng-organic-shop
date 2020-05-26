@@ -17,7 +17,7 @@ export class BasketComponent implements OnInit {
     constructor(private basketSvc: BasketService) {}
 
     ngOnInit(): void {
-        this.items$ = this.basketSvc.getItems();
+        this.items$ = this.basketSvc.listItems();
         this.count$ = this.basketSvc.count$;
         this.total$ = this.basketSvc.total$;
     }
