@@ -7,5 +7,5 @@ import { Category } from '../models/category';
     providedIn: 'root',
 })
 export class CategoryService extends DBService<Category> {
-    path = 'categories';
+    protected path = 'categories';
 }

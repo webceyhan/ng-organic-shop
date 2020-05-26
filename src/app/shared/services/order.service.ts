@@ -9,7 +9,7 @@ import { Shipping } from '../models/shipping';
     providedIn: 'root',
 })
 export class OrderService extends DBService<Order> {
-    path = 'orders';
+    protected path = 'orders';
 
     listByUser(userId: string) {
         return this.list((ref) => ref.orderByChild('userId').equalTo(userId));

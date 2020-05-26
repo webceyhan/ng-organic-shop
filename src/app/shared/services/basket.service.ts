@@ -10,7 +10,7 @@ import { DBService } from './db.service';
     providedIn: 'root',
 })
 export class BasketService extends DBService<Basket> {
-    path = 'baskets';
+    protected path = 'baskets';
 
     private id$ = new ReplaySubject<string>(1);
 

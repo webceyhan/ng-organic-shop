@@ -9,7 +9,7 @@ import { Model } from 'shared/models/model';
     providedIn: 'root',
 })
 export class DBService<T extends Model> {
-    path: string;
+    protected path: string;
 
     constructor(protected db: AngularFireDatabase) {}
 

@@ -7,5 +7,5 @@ import { User } from '../models/user';
     providedIn: 'root',
 })
 export class UserService extends DBService<User> {
-    path = 'users';
+    protected path = 'users';
 }

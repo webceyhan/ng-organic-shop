@@ -7,5 +7,5 @@ import { Product } from '../models/product';
     providedIn: 'root',
 })
 export class ProductService extends DBService<Product> {
-    path = 'products';
+    protected path = 'products';
 }
