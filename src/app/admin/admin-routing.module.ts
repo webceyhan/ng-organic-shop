@@ -7,6 +7,8 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { OrderComponent } from 'shared/components/order/order.component';
 import { AuthGuard } from 'shared/guards/auth.guard';
 import { AdminGuard } from 'shared/guards/admin.guard';
+import { ProductResolver } from 'shared/resolvers/product.resolver';
+import { OrderResolver } from 'shared/resolvers/order.resolver';
 
 const routes: Routes = [
     {
@@ -20,6 +22,7 @@ const routes: Routes = [
             {
                 path: 'products/:id',
                 component: ProductFormComponent,
+                resolve: { product: ProductResolver },
             },
             {
                 path: 'products',
@@ -28,6 +31,7 @@ const routes: Routes = [
             {
                 path: 'orders/:id',
                 component: OrderComponent,
+                resolve: { order: OrderResolver },
             },
             {
                 path: 'orders',

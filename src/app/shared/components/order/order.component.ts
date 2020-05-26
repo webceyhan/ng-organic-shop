@@ -17,17 +17,10 @@ export class OrderComponent implements OnInit {
     user$: Observable<User>;
     order$: Observable<Order>;
 
-    constructor(
-        private route: ActivatedRoute,
-        private orderSvc: OrderService,
-        private userSvc: UserService
-    ) {}
+    constructor(private route: ActivatedRoute, private userSvc: UserService) {}
 
     ngOnInit(): void {
-        this.order$ = this.route.params.pipe(
-            map((params) => params.id),
-            switchMap((id) => (id ? this.orderSvc.get(id) : of(null)))
-        );
+        this.order$ = this.route.data.pipe(map((data) => data.order));
 
         this.user$ = this.order$.pipe(
             map((order) => order?.userId),

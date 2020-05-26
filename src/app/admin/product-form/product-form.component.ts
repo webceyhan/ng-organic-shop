@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/operators';
 
 import { ProductService } from 'shared/services/product.service';
 import { CategoryService } from 'shared/services/category.service';
@@ -23,15 +22,8 @@ export class ProductFormComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        const { id } = this.route.snapshot.params;
-        if (id) {
-            this.productSvc
-                .get(id)
-                .pipe(take(1))
-                .subscribe((p) => (this.product = p));
-        }
-
         this.categories$ = this.categorySvc.list();
+        this.product = this.route.snapshot.data.product || {};
     }
 
     async onSave() {
