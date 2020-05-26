@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 import { auth } from 'firebase/app';
+import { of, Observable } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
 import { UserService } from './user.service';
 import { User } from '../models/user';
@@ -13,28 +13,26 @@ import { User } from '../models/user';
 })
 export class AuthService {
     constructor(
-        private auth: AngularFireAuth,
         private route: ActivatedRoute,
+        private router: Router,
+        private auth: AngularFireAuth,
         private userSvc: UserService
-    ) {}
+    ) {
+        this.state$.subscribe(this.listen.bind(this));
+    }
 
-    get state$() {
+    get state$(): Observable<firebase.User> {
         return this.auth.authState;
     }
 
-    get user$() {
+    get user$(): Observable<User> {
         return this.state$.pipe(
-            switchMap((state) => {
-                if (!state) return of();
-                return this.userSvc
-                    .get(state.uid)
-                    .pipe(map((user) => ({ ...user, id: state.uid })));
-            }),
-            map((user) => user as User)
+            map((state) => state?.uid),
+            switchMap((id) => (id ? this.userSvc.get(id) : of(null)))
         );
     }
 
-    login() {
+    async login() {
         // workaround for query params getting lost
         // after google auth redirection done on the same page
         const { redirect } = this.route.snapshot.queryParams;
@@ -44,7 +42,28 @@ export class AuthService {
         this.auth.signInWithRedirect(new auth.GoogleAuthProvider());
     }
 
-    logout() {
-        this.auth.signOut();
+    async logout() {
+        await this.auth.signOut();
+        this.router.navigate(['/']);
+    }
+
+    // HELPERS /////////////////////////////////////////////////////////////////////////////////////
+
+    private listen(state: firebase.User) {
+        // skip if not authenticated
+        if (!state) return;
+
+        // save authenticated user
+        this.userSvc.save({
+            id: state.uid,
+            name: state.displayName,
+            email: state.email,
+            // isAdmin: false,
+        } as any);
+
+        // redirect after login if exists
+        const url = localStorage.getItem('redirect');
+        url && localStorage.removeItem('redirect');
+        url && this.router.navigate([url]);
     }
 }

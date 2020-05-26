@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { User } from 'shared/models/user';
 import { AuthService } from 'shared/services/auth.service';
@@ -15,10 +14,9 @@ export class NavbarComponent implements OnInit {
     basketCount: number;
 
     constructor(
-        private router: Router,
         private authSvc: AuthService,
         private basketSvc: BasketService
-    ) { }
+    ) {}
 
     ngOnInit() {
         this.authSvc.user$.subscribe((user) => (this.user = user));
@@ -27,6 +25,5 @@ export class NavbarComponent implements OnInit {
 
     onLogout() {
         this.authSvc.logout();
-        this.router.navigate(['/']);
     }
 }
