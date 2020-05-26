@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 
-import { AuthService } from 'shared/services/auth.service';
-import { OrderService } from 'shared/services/order.service';
 import { BasketService } from 'shared/services/basket.service';
 import { BasketItem } from 'shared/models/basket';
 import { Shipping } from 'shared/models/shipping';
@@ -17,24 +14,14 @@ import { Router } from '@angular/router';
 export class CheckoutComponent implements OnInit {
     items$: Observable<BasketItem[]>;
 
-    constructor(
-        private router: Router,
-        private authSvc: AuthService,
-        private orderSvc: OrderService,
-        private basketSvc: BasketService
-    ) {}
+    constructor(private router: Router, private basketSvc: BasketService) {}
 
     ngOnInit(): void {
         this.items$ = this.basketSvc.listItems();
     }
 
     async onOrder(shipping: Shipping) {
-        const { uid } = await this.authSvc.state$.pipe(take(1)).toPromise();
-        const items = await this.items$.pipe(take(1)).toPromise();
-        const data = this.orderSvc.prepare(uid, shipping, items);
-        const order = await this.orderSvc.save(data);
-
-        this.basketSvc.clear();
+        const order = await this.basketSvc.checkout(shipping);
         this.router.navigate(['/orders', order.id]);
     }
 }

@@ -3,8 +3,11 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { ReplaySubject, Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 
-import { Basket, BasketItem } from '../models/basket';
 import { DBService } from './db.service';
+import { AuthService } from './auth.service';
+import { OrderService } from './order.service';
+import { Shipping } from 'shared/models/shipping';
+import { Basket, BasketItem } from 'shared/models/basket';
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +17,11 @@ export class BasketService extends DBService<Basket> {
 
     private id$ = new ReplaySubject<string>(1);
 
-    constructor(db: AngularFireDatabase) {
+    constructor(
+        db: AngularFireDatabase,
+        private authSvc: AuthService,
+        private orderSvc: OrderService
+    ) {
         super(db);
         this.load();
     }
@@ -41,6 +48,32 @@ export class BasketService extends DBService<Basket> {
 
         // update or delete if quantity = 0
         item.quantity ? ref.update(item) : ref.remove();
+    }
+
+    async checkout(shipping: Shipping) {
+        const user = await this.authSvc.user$.pipe(take(1)).toPromise();
+        const basketItems = await this.listItems().pipe(take(1)).toPromise();
+
+        // build order items
+        const items = basketItems.map(
+            ({ title, imageUrl, price, quantity }) => ({
+                title,
+                imageUrl,
+                price,
+                quantity,
+                total: price * quantity,
+            })
+        );
+
+        // save the order
+        const order = await this.orderSvc.save({
+            userId: user.id,
+            shipping,
+            items,
+        });
+
+        this.clear();
+        return order;
     }
 
     async clear() {
