@@ -22,7 +22,7 @@ export class OrdersComponent implements OnInit {
         this.orders$ = this.authSvc.user$.pipe(
             tap((user) => (this.user = user)),
             switchMap((user) =>
-                user ? this.orderSvc.getByUser(user.key) : of()
+                user ? this.orderSvc.getByUser(user.id) : of()
             ),
             map((orders) => orders as Order[])
         );

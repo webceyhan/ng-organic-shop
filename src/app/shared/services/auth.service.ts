@@ -28,7 +28,7 @@ export class AuthService {
                 if (!state) return of();
                 return this.userSvc
                     .get(state.uid)
-                    .pipe(map((user) => ({ ...user, key: state.uid })));
+                    .pipe(map((user) => ({ ...user, id: state.uid })));
             }),
             map((user) => user as User)
         );

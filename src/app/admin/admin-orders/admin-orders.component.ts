@@ -17,7 +17,7 @@ export class AdminOrdersComponent implements OnInit {
     constructor(private userSvc: UserService, private orderSvc: OrderService) {}
 
     ngOnInit(): void {
-        const users$ = this.userSvc.getAll();
+        const users$ = this.userSvc.list();
         const orders$ = this.orderSvc.get();
         const all$ = combineLatest(users$, orders$);
 
@@ -25,7 +25,7 @@ export class AdminOrdersComponent implements OnInit {
             map(([users, orders]) => {
                 // build user map (optimization)
                 const usersMap = users.reduce(
-                    (all, u) => ({ ...all, [u.key]: u }),
+                    (all, u) => ({ ...all, [u.id]: u }),
                     {}
                 );
 

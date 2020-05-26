@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'firebase';
 
 import { AuthService } from 'shared/services/auth.service';
 import { UserService } from 'shared/services/user.service';
@@ -17,10 +18,15 @@ export class LayoutComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.authSvc.state$.subscribe((state) => {
+        this.authSvc.state$.subscribe((state: User) => {
             if (state) {
                 // save logged-in user to db
-                this.userSvc.save(state);
+                this.userSvc.save({
+                    id: state.uid,
+                    name: state.displayName,
+                    email: state.email,
+                    // isAdmin: false,
+                } as any);
 
                 // redirect to origin page on login
                 // if only redirect url exists
