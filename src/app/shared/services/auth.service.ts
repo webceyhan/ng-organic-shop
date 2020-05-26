@@ -58,6 +58,7 @@ export class AuthService {
             id: state.uid,
             name: state.displayName,
             email: state.email,
+            photoUrl: state.photoURL
             // isAdmin: false,
         } as any);
 
