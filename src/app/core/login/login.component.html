@@ -1,3 +1,21 @@
-<button class="btn btn-primary" (click)="onLogin()">
-    <i class="fab fa-google"></i> Login with Google
-</button>
+<div class="d-flex justify-content-center">
+    <div class="card m-5">
+        <div class="card-body">
+            <button
+                class="btn btn-primary btn-block"
+                (click)="onLogin('google')"
+            >
+                <i class="fab fa-google"></i> Login with Google
+            </button>
+
+            <br />
+
+            <button
+                class="btn btn-primary btn-block"
+                (click)="onLogin('facebook')"
+            >
+                <i class="fab fa-google"></i> Login with Facebook
+            </button>
+        </div>
+    </div>
+</div>

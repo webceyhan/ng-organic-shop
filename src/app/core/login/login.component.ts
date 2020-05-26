@@ -10,7 +10,7 @@ import { AuthService } from 'shared/services/auth.service';
 export class LoginComponent {
     constructor(private authSvc: AuthService) {}
 
-    onLogin() {
-        this.authSvc.login();
+    onLogin(provider: string) {
+        this.authSvc.login(provider);
     }
 }

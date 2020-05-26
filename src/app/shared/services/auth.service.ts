@@ -32,14 +32,23 @@ export class AuthService {
         );
     }
 
-    async login() {
+    async login(provider?: string) {
         // workaround for query params getting lost
         // after google auth redirection done on the same page
         const { redirect } = this.route.snapshot.queryParams;
         localStorage.setItem('redirect', redirect || '/');
 
-        // bugfix: signInWithRedirect().then() promise not working
-        this.auth.signInWithRedirect(new auth.GoogleAuthProvider());
+        switch (provider) {
+            case 'facebook':
+                this.auth.signInWithRedirect(new auth.FacebookAuthProvider());
+                break;
+
+            default:
+                // default provider = google
+                // bugfix: signInWithRedirect().then() promise not working
+                this.auth.signInWithRedirect(new auth.GoogleAuthProvider());
+                break;
+        }
     }
 
     async logout() {
@@ -58,7 +67,7 @@ export class AuthService {
             id: state.uid,
             name: state.displayName,
             email: state.email,
-            photoUrl: state.photoURL
+            photoUrl: state.photoURL,
             // isAdmin: false,
         } as any);
 
