@@ -10,6 +10,7 @@ import { QuanntityInputComponent } from './components/quanntity-input/quanntity-
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
 import { OrderComponent } from './components/order/order.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 const DECLARATIONS = [
     UrlValidator,
@@ -19,6 +20,7 @@ const DECLARATIONS = [
     OrderSummaryComponent,
     ShippingFormComponent,
     OrderComponent,
+    FilterPipe,
 ];
 
 @NgModule({

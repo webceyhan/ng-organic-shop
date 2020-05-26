@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Product } from 'shared/models/product';
 import { ProductService } from 'shared/services/product.service';
-import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
     selector: 'app-admin-products',
@@ -11,20 +10,13 @@ import { map, shareReplay } from 'rxjs/operators';
     styleUrls: ['./admin-products.component.css'],
 })
 export class AdminProductsComponent implements OnInit {
+    query: string;
     products$: Observable<Product[]>;
-    filter$ = new BehaviorSubject<string>('');
 
     constructor(private productSvc: ProductService) {}
 
     ngOnInit(): void {
-        const products$ = this.productSvc.list().pipe(shareReplay(1));
-        const filter$ = this.filter$.pipe(map((q) => q.toLowerCase()));
-
-        this.products$ = combineLatest(products$, filter$).pipe(
-            map(([list, query]) =>
-                list.filter((p) => p.title.toLowerCase().includes(query))
-            )
-        );
+        this.products$ = this.productSvc.list();
     }
 
     onDelete(id: string) {
@@ -36,6 +28,6 @@ export class AdminProductsComponent implements OnInit {
     }
 
     onFilter(query: string) {
-        this.filter$.next(query);
+        this.query = query.toLowerCase();
     }
 }
