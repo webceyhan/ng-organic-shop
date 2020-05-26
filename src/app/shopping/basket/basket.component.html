@@ -7,7 +7,6 @@
 
     <app-basket-items
         [items]="items$ | async"
-        [total]="total$ | async"
         (itemUpdate)="onItemUpdate($event)"
     ></app-basket-items>
 

@@ -23,13 +23,6 @@ export class BasketService extends DBService<Basket> {
         return this.listItems().pipe(map((items) => items.length));
     }
 
-    get total$() {
-        return this.listItems().pipe(
-            map((items) => items.map((item) => item.price * item.quantity)),
-            map((prices) => prices.reduce((sum, price) => sum + price, 0))
-        );
-    }
-
     get(id?: string): Observable<Basket> {
         if (id) return super.get(id);
         return this.id$.pipe(switchMap((id) => super.get(id)));

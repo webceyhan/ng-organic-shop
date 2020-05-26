@@ -14,8 +14,12 @@ export class BasketItemsComponent {
     @Output()
     itemUpdate = new EventEmitter<BasketItem>();
 
-    @Input()
-    total = 0;
+    get total() {
+        return (this.items || []).reduce(
+            (sum, i) => sum + i.price * i.quantity,
+            0
+        );
+    }
 
     onQuantityUpdate(item: BasketItem, quantity: number) {
         this.itemUpdate.emit({ ...item, quantity });

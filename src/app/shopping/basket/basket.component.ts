@@ -12,14 +12,12 @@ import { BasketItem } from 'shared/models/basket';
 export class BasketComponent implements OnInit {
     items$: Observable<BasketItem[]>;
     count$: Observable<number>;
-    total$: Observable<number>;
 
     constructor(private basketSvc: BasketService) {}
 
     ngOnInit(): void {
         this.items$ = this.basketSvc.listItems();
         this.count$ = this.basketSvc.count$;
-        this.total$ = this.basketSvc.total$;
     }
 
     onItemUpdate(item: BasketItem) {
