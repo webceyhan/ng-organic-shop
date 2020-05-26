@@ -11,7 +11,7 @@ import { Model } from 'shared/models/model';
 export class DBService<T extends Model> {
     path: string;
 
-    constructor(private db: AngularFireDatabase) {}
+    constructor(protected db: AngularFireDatabase) {}
 
     // CRUD METHODS ////////////////////////////////////////////////////////////////////////////////
 
