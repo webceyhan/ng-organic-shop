@@ -36,11 +36,9 @@ export class DBService<T extends Model> {
     async save(obj: T): Promise<T> {
         // prepare data
         const data = this.sanitize(obj);
-        data.updatedAt = new Date().getTime();
 
         if (!obj.id) {
             // create
-            data.createdAt = data.updatedAt;
             data.id = (await this.listRef().push(data)).key;
         } else {
             // update
@@ -72,8 +70,16 @@ export class DBService<T extends Model> {
     }
 
     protected sanitize(obj: T): T {
-        const data = { ...obj };
+        const updatedAt = new Date().getTime();
+        const data = { ...obj, updatedAt };
+
+        // remove id
         delete data.id;
+
+        // set create date if not exists yet
+        if (data.createdAt === null) {
+            data.createdAt = updatedAt;
+        }
 
         return data;
     }
