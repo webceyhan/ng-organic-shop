@@ -18,6 +18,11 @@ const routes: Routes = [
         canActivate: [AuthGuard, AdminGuard],
         children: [
             {
+                path: '',
+                redirectTo: 'products',
+                pathMatch: 'full',
+            },
+            {
                 path: 'products/new',
                 component: ProductFormComponent,
             },
