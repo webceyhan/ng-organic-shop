@@ -19,7 +19,13 @@ export class OrdersComponent implements OnInit {
     ngOnInit(): void {
         this.orders$ = this.authSvc.user$.pipe(
             map((user) => user.id),
-            switchMap((id) => this.orderSvc.listByUser(id))
+            switchMap((id) => this.orderSvc.listByUser(id)),
+            map((orders) =>
+                orders.map((o) => ({
+                    ...o,
+                    total: o.items.reduce((sum, i) => sum + i.total, 0),
+                }))
+            )
         );
     }
 }

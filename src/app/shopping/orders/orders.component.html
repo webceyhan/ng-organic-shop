@@ -5,6 +5,7 @@
         <tr>
             <th>#</th>
             <th>Date</th>
+            <th>Total</th>
             <th></th>
         </tr>
     </thead>
@@ -12,6 +13,7 @@
         <tr *ngFor="let order of orders$ | async">
             <td class="w-50">{{ order.id }}</td>
             <td class="w-25">{{ order.createdAt | date }}</td>
+            <td class="w-25">{{ order.total | currency }}</td>
             <td class="text-right">
                 <a class="btn btn-link" [routerLink]="['/orders', order.id]"
                     >View</a
