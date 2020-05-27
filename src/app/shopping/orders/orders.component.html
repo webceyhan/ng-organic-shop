@@ -1,6 +1,6 @@
 <h1 class="display-4">My Orders</h1>
 
-<table class="table table-hover">
+<table class="table table-hover vertical-align">
     <thead class="thead-light">
         <tr>
             <th>#</th>
@@ -10,10 +10,10 @@
     </thead>
     <tbody>
         <tr *ngFor="let order of orders$ | async">
-            <td>{{ order.id }}</td>
-            <td>{{ order.createdAt | date }}</td>
-            <td>
-                <a class="mr-2" [routerLink]="['/orders', order.id]"
+            <td class="w-50">{{ order.id }}</td>
+            <td class="w-25">{{ order.createdAt | date }}</td>
+            <td class="text-right">
+                <a class="btn btn-link" [routerLink]="['/orders', order.id]"
                     >View</a
                 >
             </td>
