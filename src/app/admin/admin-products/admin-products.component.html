@@ -21,6 +21,7 @@
 <table class="table table-hover vertical-align">
     <thead class="thead-light">
         <tr>
+            <th></th>
             <th>Title</th>
             <th>Price</th>
             <th></th>
@@ -28,6 +29,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let product of products$ | async | filter: 'title':query">
+            <td>
+                <img [src]="product.imageUrl" class="img-cover rounded-circle">
+            </td>
             <td class="w-50">{{ product.title }}</td>
             <td class="w-25">{{ product.price | currency }}</td>
             <td class="text-right">
