@@ -44,16 +44,16 @@
                         />
                     </a>
                     <div class="dropdown-menu" ngbDropdownMenu>
-                        <h6 class="dropdown-header text-warning">{{ user.name }}</h6>
+                        <h6 class="dropdown-header text-warning">
+                            {{ user.name }}
+                        </h6>
                         <a routerLink="/orders" ngbDropdownItem>My Orders</a>
-                        <ng-container *ngIf="user.isAdmin">
-                            <a routerLink="/admin/orders" ngbDropdownItem
-                                >Manage Orders</a
-                            >
-                            <a routerLink="/admin/products" ngbDropdownItem
-                                >Manage Products</a
-                            >
-                        </ng-container>
+                        <a
+                            *ngIf="user.isAdmin"
+                            routerLink="/admin"
+                            ngbDropdownItem
+                            >Manage Shop</a
+                        >
                         <div class="dropdown-divider"></div>
                         <a class="pointer" ngbDropdownItem (click)="onLogout()"
                             >Log Out</a
