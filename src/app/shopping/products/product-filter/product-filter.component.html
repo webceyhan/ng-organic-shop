@@ -1,13 +1,13 @@
 <div class="sticky-top">
     <div class="list-group">
         <a
-            routerLink="/products"
+            routerLink="."
             class="list-group-item list-group-item-action text-success"
             >All Categories</a
         >
         <a
             *ngFor="let category of categories"
-            routerLink="/products"
+            routerLink="."
             routerLinkActive="active"
             [queryParams]="{ category: category.id }"
             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
