@@ -86,16 +86,12 @@
                     name="imageUrl"
                     type="text"
                     class="form-control"
-                    required
                     url
                 />
                 <small
                     class="form-text text-danger"
                     *ngIf="imageUrl.touched && imageUrl.invalid"
                 >
-                    <div *ngIf="imageUrl.errors.required">
-                        image url is required
-                    </div>
                     <div *ngIf="imageUrl.errors.url">
                         please enter a valid url
                     </div>
