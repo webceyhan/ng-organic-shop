@@ -1,21 +1,22 @@
+<a routerLink="./new" class="btn btn-primary">New Category</a>
+
+<br />
+<br />
+
 <div class="row">
-    <div class="col-md-5">
-        <div class="sticky-top">
-            <div class="list-group">
-                <a
-                    *ngFor="let category of categories$ | async"
-                    routerLink="/products"
-                    routerLinkActive="active"
-                    [queryParams]="{ category: category.id }"
-                    class="list-group-item list-group-item-action"
-                    >{{ category.name }}</a
-                >
-            </div>
+    <div class="col-md-4">
+        <div class="list-group">
+            <a
+                class="list-group-item list-group-item-action"
+                *ngFor="let category of categories$ | async"
+                [routerLink]="['.', category.id]"
+                routerLinkActive="active"
+                >{{ category.name }}
+            </a>
         </div>
     </div>
 
-    <div class="col-md-7">
+    <div class="col-md-8">
         <router-outlet></router-outlet>
     </div>
-
 </div>
