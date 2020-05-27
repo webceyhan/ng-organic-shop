@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { BasketService } from 'shared/services/basket.service';
 import { BasketItem } from 'shared/models/basket';
 import { Shipping } from 'shared/models/shipping';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-checkout',
