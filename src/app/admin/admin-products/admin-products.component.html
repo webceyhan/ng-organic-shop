@@ -30,7 +30,7 @@
     <tbody>
         <tr *ngFor="let product of products$ | async | filter: 'title':query">
             <td>
-                <img [src]="product.imageUrl" class="img-cover rounded-circle">
+                <img [src]="product.imageUrl" class="img-cover rounded-circle" fallback>
             </td>
             <td class="w-50">{{ product.title }}</td>
             <td class="w-25">{{ product.price | currency }}</td>
