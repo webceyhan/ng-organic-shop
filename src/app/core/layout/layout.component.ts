@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.css'],
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+    onScrollTop() {
+        window.scroll(0, 0);
+    }
+}
