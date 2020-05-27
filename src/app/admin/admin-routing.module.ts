@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
 import { ProductFormComponent } from './product-form/product-form.component';
+import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { AdminProductsComponent } from './admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { OrderComponent } from 'shared/components/order/order.component';
@@ -21,6 +22,10 @@ const routes: Routes = [
                 path: '',
                 redirectTo: 'products',
                 pathMatch: 'full',
+            },
+            {
+                path: 'categories',
+                component: AdminCategoriesComponent,
             },
             {
                 path: 'products/new',
