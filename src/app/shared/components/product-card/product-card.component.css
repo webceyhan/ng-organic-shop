@@ -1,12 +1,11 @@
 .card:hover:not(.preview) {
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
-.card-img-top {
+.img-cover {
     max-height: 8rem;
-    object-fit: cover;
 }
 
-.preview .card-img-top {
+.preview .img-cover {
     max-height: 20rem;
 }
