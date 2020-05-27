@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AdminComponent } from './admin.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { AdminProductsComponent } from './admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
@@ -13,6 +14,7 @@ import { OrderResolver } from 'shared/resolvers/order.resolver';
 const routes: Routes = [
     {
         path: 'admin',
+        component: AdminComponent,
         canActivate: [AuthGuard, AdminGuard],
         children: [
             {
