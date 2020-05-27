@@ -18,7 +18,7 @@
 <br />
 <br />
 
-<table class="table table-hover">
+<table class="table table-hover vertical-align">
     <thead class="thead-light">
         <tr>
             <th>Title</th>
@@ -27,14 +27,23 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of products$ | async | filter:'title':query">
-            <td>{{ product.title }}</td>
-            <td>{{ product.price | currency }}</td>
-            <td>
-                <a class="mr-2" [routerLink]="['/admin/products', product.id]"
-                    >Edit</a
+        <tr *ngFor="let product of products$ | async | filter: 'title':query">
+            <td class="w-50">{{ product.title }}</td>
+            <td class="w-25">{{ product.price | currency }}</td>
+            <td class="text-right">
+                <a
+                    class="btn btn-link"
+                    [routerLink]="['/admin/products', product.id]"
                 >
-                <a href="#" (click)="onDelete(product.id)">Delete</a>
+                    Edit
+                </a>
+                <button
+                    type="button"
+                    class="btn btn-link"
+                    (click)="onDelete(product.id)"
+                >
+                    Delete
+                </button>
             </td>
         </tr>
     </tbody>

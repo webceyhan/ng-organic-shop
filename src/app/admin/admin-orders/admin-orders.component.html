@@ -1,7 +1,7 @@
 <ng-container *ngIf="userMap$ | async as userMap">
     <h1 class="display-4">Orders</h1>
 
-    <table class="table table-hover">
+    <table class="table table-hover vertical-align">
         <thead class="thead-light">
             <tr>
                 <th>Customer</th>
@@ -13,7 +13,7 @@
             <tr *ngFor="let order of orders$ | async">
                 <td class="w-50">{{ userMap[order.userId].name }}</td>
                 <td class="w-25">{{ order.createdAt | date }}</td>
-                <td>
+                <td class="text-right">
                     <a
                         class="btn btn-link"
                         [routerLink]="['/admin/orders', order.id]"

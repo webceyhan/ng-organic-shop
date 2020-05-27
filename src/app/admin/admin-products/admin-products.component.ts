@@ -23,8 +23,6 @@ export class AdminProductsComponent implements OnInit {
         if (confirm('Are you sure to delete this product?')) {
             this.productSvc.remove(id);
         }
-        // prevent default href event
-        return false;
     }
 
     onFilter(query: string) {

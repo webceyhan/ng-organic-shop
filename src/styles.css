@@ -11,3 +11,7 @@ body {
 .ng-touched.ng-invalid {
     border-color: red;
 }
+
+table.vertical-align td {
+    vertical-align: middle;
+}
