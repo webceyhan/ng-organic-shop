@@ -1,1 +1,21 @@
-<h1 class="display-4 text-capitalize">welcome to organic shop</h1>
+<h1 class="display-4">
+    Welcome to <i class="fas fa-leaf text-success"></i> OrganicShop
+</h1>
+
+<br />
+
+<ngb-carousel *ngIf="products$ | async as products">
+    <ng-container *ngFor="let product of products">
+        <ng-template ngbSlide>
+            <div class="pointer" routerLink="/products">
+                <img [src]="product.imageUrl" class="w-100 img-cover" />
+            </div>
+            <div class="carousel-caption">
+                <div class="bg-dark-50 mr-auto">
+                    <h3>{{ product.title }}</h3>
+                    <p class="m-0">{{ product.price | currency }}</p>
+                </div>
+            </div>
+        </ng-template>
+    </ng-container>
+</ngb-carousel>

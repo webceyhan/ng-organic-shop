@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Product } from 'shared/models/product';
+import { ProductService } from 'shared/services/product.service';
 
 @Component({
     selector: 'app-home',
@@ -6,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-    constructor() {}
+    products$: Observable<Product[]>;
 
-    ngOnInit(): void {}
+    constructor(private productSvc: ProductService) {}
+
+    ngOnInit(): void {
+        this.products$ = this.productSvc.list();
+    }
 }

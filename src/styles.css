@@ -15,3 +15,11 @@ body {
 table.vertical-align td {
     vertical-align: middle;
 }
+
+.img-cover {
+    object-fit: cover;
+}
+
+.bg-dark-50 {
+    background-color: rgba(0, 0, 0, 0.5);
+}
