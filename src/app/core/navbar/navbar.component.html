@@ -6,20 +6,24 @@
         </a>
 
         <!-- collapse button -->
-        <button class="navbar-toggler" type="button">
+        <button
+            class="navbar-toggler"
+            type="button"
+            (click)="isMenuCollapsed = !isMenuCollapsed"
+        >
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed">
             <!-- navigation items -->
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-md-auto">
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/products">Products</a>
                 </li>
             </ul>
 
             <!-- user menu -->
-            <ul class="navbar-nav align-items-center">
+            <ul class="navbar-nav align-items-md-center">
                 <li class="nav-item mr-2" routerLinkActive="active">
                     <a
                         class="nav-link d-flex align-items-center"

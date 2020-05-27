@@ -12,6 +12,7 @@ import { BasketService } from 'shared/services/basket.service';
 export class NavbarComponent implements OnInit {
     user: User;
     basketCount: number;
+    isMenuCollapsed = true;
 
     constructor(
         private authSvc: AuthService,
