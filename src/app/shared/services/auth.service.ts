@@ -1,7 +1,7 @@
+import firebase from 'firebase/compat/app';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
-import { auth } from 'firebase/compat/app';
 import { of, Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
@@ -40,13 +40,13 @@ export class AuthService {
 
         switch (provider) {
             case 'facebook':
-                this.auth.signInWithRedirect(new auth.FacebookAuthProvider());
+                this.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
                 break;
 
             default:
                 // default provider = google
                 // bugfix: signInWithRedirect().then() promise not working
-                this.auth.signInWithRedirect(new auth.GoogleAuthProvider());
+                this.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
                 break;
         }
     }
