@@ -1,3 +1,5 @@
+[![Deploy to Firebase Hosting on merge](https://github.com/webceyhan/organic-shop/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/webceyhan/organic-shop/actions/workflows/firebase-hosting-merge.yml)
+
 # OrganicShop
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
