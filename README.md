@@ -1,5 +1,6 @@
 <!-- AUTOMATION BADGES -->
 
+[![CodeQL](https://github.com/webceyhan/ng-organic-shop/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/webceyhan/ng-organic-shop/actions/workflows/codeql-analysis.yml)
 [![Deploy to Firebase](https://github.com/webceyhan/ng-organic-shop/actions/workflows/firebase.yml/badge.svg)](https://github.com/webceyhan/ng-organic-shop/actions/workflows/firebase.yml)
 
 <!-- LOGO (OPTIONAL) -->
