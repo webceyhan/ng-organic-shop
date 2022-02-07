@@ -7,7 +7,7 @@ export const environment = {
         projectId: 'organic-shop-92b11',
         storageBucket: 'organic-shop-92b11.appspot.com',
         messagingSenderId: '773794572505',
-        appId: '1:773794572505:web:00e01dbcdb1f705e0936c8',
-        measurementId: 'G-TDZWQSD5DV',
+        appId: '1:773794572505:web:089cf9ec0f22ef830936c8',
+        measurementId: 'G-3X1S7945CV',
     },
 };
