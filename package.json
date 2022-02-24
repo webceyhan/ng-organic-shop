@@ -29,7 +29,7 @@
       "@angular/localize": "~13.2.0",
       "@angular/platform-browser": "~13.2.0",
       "@angular/platform-browser-dynamic": "~13.2.0",
-      "@angular/router": "~13.2.0",
+      "@angular/router": "~13.2.4",
       "@fortawesome/fontawesome-free": "^5.13.0",
       "@ng-bootstrap/ng-bootstrap": "^11.0.0",
       "bootstrap": "^4.6.1",
